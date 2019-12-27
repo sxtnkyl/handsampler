@@ -48,33 +48,33 @@ const useStyles = makeStyles(theme => ({
 const FormCompiler = () => {
   const classes = useStyles();
   //get component to render
-  const questionList = {
-    0: {
+  const questionList = [
+    {
       component: Begin,
       title: "Welcome to the Hand Sample Generator!",
       output: "let's begin"
     },
-    1: { component: GrainSize, title: "Grain Size", output: "" },
-    2: { component: Color, title: "Color", output: "" },
-    3: { component: Density, title: "Density", output: "" },
-    4: { component: Moisture, title: "Moisture", output: "" },
-    5: { component: Plasticity, title: "Plasticity", output: "" },
-    6: { component: Cohesiveness, title: "Cohesiveness", output: "" },
-    7: {
+    { component: GrainSize, title: "Grain Size", output: "" },
+    { component: Color, title: "Color", output: "" },
+    { component: Density, title: "Density", output: "" },
+    { component: Moisture, title: "Moisture", output: "" },
+    { component: Plasticity, title: "Plasticity", output: "" },
+    { component: Cohesiveness, title: "Cohesiveness", output: "" },
+    {
       component: SedimentaryStructure,
       title: "Sedimentary Structure",
       output: ""
     },
-    8: { component: Weathering, title: "Weathering", output: "" },
-    9: {
+    { component: Weathering, title: "Weathering", output: "" },
+    {
       component: DepositionalEnv,
       title: "Depositional Environment",
       output: ""
     },
-    10: { component: StratName, title: "Stratigraphic Name", output: "" },
-    11: { component: StratContact, title: "Stratigraphic Contact", output: "" },
-    12: { component: End, title: "Finish", output: "" }
-  };
+    { component: StratName, title: "Stratigraphic Name", output: "" },
+    { component: StratContact, title: "Stratigraphic Contact", output: "" },
+    { component: End, title: "Finish", output: "" }
+  ];
 
   //step corresponds to questionComponentList index, and therefore output index to match
   const [step, setStep] = useState(0);
@@ -106,7 +106,7 @@ const FormCompiler = () => {
     <Button
       variant="outlined"
       size="small"
-      disabled={step === Object.keys(output).length - 1}
+      disabled={step === output.length - 1}
     >
       finish
     </Button>
@@ -118,17 +118,17 @@ const FormCompiler = () => {
     </Button>
   );
   const nextButton = (
-    <Button
-      onClick={moveForward}
-      disabled={step === Object.keys(output).length - 1}
-    >
+    <Button onClick={moveForward} disabled={step === output.length - 1}>
       forward
       <KeyboardArrowRight />
     </Button>
   );
 
   const handleChange = input => e => {
-    setOutput(output, (output[step].output = e.target.value));
+    //val const for mui button vs other inputs
+    console.log(e);
+    const val = e.currentTarget.value ? e.currentTarget.value : e.target.value;
+    setOutput(output, (output[step].output = val));
     console.log(output);
   };
 
@@ -147,7 +147,7 @@ const FormCompiler = () => {
   const progressBar = (
     <MobileStepper
       variant="progress"
-      steps={Object.values(output).length}
+      steps={output.length}
       position="static"
       activeStep={step}
       className={classes.progress}

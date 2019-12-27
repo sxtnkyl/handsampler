@@ -142,6 +142,8 @@ const grainSizeObj = {
                   }
                 },
                 plastic: {
+                  descrip:
+                    "A thread of fine soil is rolled over a flat, smooth surface. If the thread keeps narrowing down to a much smaller diameter without cracking, the soil is termed to have a plastic nature.",
                   question: "Is the sample > or < 15% sand?",
                   options: {
                     "<15% sand": {
@@ -295,6 +297,8 @@ const grainSizeObj = {
                   }
                 },
                 plastic: {
+                  descrip:
+                    "A thread of fine soil is rolled over a flat, smooth surface. If the thread keeps narrowing down to a much smaller diameter without cracking, the soil is termed to have a plastic nature.",
                   question: "Is the sample > or < 15% gravel?",
                   options: {
                     "<15% gravel": {

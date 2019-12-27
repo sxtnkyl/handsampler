@@ -19,7 +19,9 @@ import {
   Radio,
   Tabs,
   Tab,
-  Box
+  Box,
+  Checkbox,
+  FormGroup
 } from "@material-ui/core";
 
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
@@ -47,5 +49,7 @@ export {
   Radio,
   Tabs,
   Tab,
-  Box
+  Box,
+  Checkbox,
+  FormGroup
 };

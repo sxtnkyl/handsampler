@@ -11,6 +11,7 @@ import {
   Button
 } from "../../utility/themeIndex";
 import grainSizeObj from "../../utility/grainSizeObj";
+//import as JSON and parse for increase performance
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -26,11 +27,12 @@ const GrainSize = props => {
   const classes = useStyles();
   const { card, step, outputStep, handleChange } = props;
 
+  //end output to put in global state is a group symbol and group name
+  const [answer, setAnswer] = useState(null);
+  //FUTURE TASK: onclick of grainsize answer add timeout func to display answer set
+
   //used for index matching
   const [tabs, setTabs] = useState(0);
-  //end output to put in global state is a group symbol and group name
-  const [answer, setAnswer] = useState({ symbol: "", name: "" });
-
   //holds line for form update; strings used to make object path
   const [questionLine, setQuestionLine] = useState([]);
   useEffect(() => {
@@ -67,7 +69,7 @@ const GrainSize = props => {
     setTabs(newtab);
   };
 
-  //question made of three parts: the question(currentQuestion), answer options(optionsTab), option description(tabPanel)
+  //question made of three parts: the question(currentQuestion), answer options(optionsTab), option description(tabDescrip)
   //Next submits the value of the selected tab to the questionLine state
   const currentQuestion = <Typography>{path.question}</Typography>;
 
@@ -85,23 +87,38 @@ const GrainSize = props => {
     </Tabs>
   );
 
-  const tabPanel = Object.entries(path.options).map((e, index) => (
-    <Typography key={index} index={index}>
-      {index === tabs && `${e[1].descrip}`}
-      {index === tabs && (
-        <Button key={e[index]} onClick={() => pushClick(e[0])}>
-          select
-        </Button>
-      )}
-    </Typography>
-  ));
+  const tabDescrip = Object.entries(path.options).map((e, index) => {
+    if (index === tabs && e[1].hasOwnProperty("symbol")) {
+      let entry = index === tabs && e[1];
+      let value = `${entry.name} (${entry.symbol})`;
+      return (
+        <Typography key={index} index={index}>
+          The sample group symbol and name is:
+          <Button value={value} onClick={handleChange(e)}>
+            {value}
+          </Button>
+          click to confirm!
+        </Typography>
+      );
+    } else
+      return (
+        <Typography key={index} index={index}>
+          {index === tabs && `${e[1].descrip}`}
+          {index === tabs && (
+            <Button key={e[index]} onClick={() => pushClick(e[0])}>
+              select
+            </Button>
+          )}
+        </Typography>
+      );
+  });
 
   return (
     <Slide direction="right" in={step === 1}>
       <Paper className={card}>
         {currentQuestion}
         {optionsTabs}
-        {tabPanel}
+        {tabDescrip}
       </Paper>
     </Slide>
   );

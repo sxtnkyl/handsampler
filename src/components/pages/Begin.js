@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 
 const Begin = props => {
   const classes = useStyles();
-  const { card, step, outputStep } = props;
+  const { card, step } = props;
 
   return (
     <Slide direction="right" in={step === 0}>

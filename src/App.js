@@ -2,10 +2,7 @@ import React from "react";
 import "./App.css";
 import FormCompiler from "./components/FormCompiler";
 
-//state: step and fields
-//
-//methods: nextStep(), prevStep(), handleChange()
-//structure: USER FORM: determines which component to display
+//https://www.dot.ny.gov/divisions/engineering/technical-services/geotechnical-engineering-bureau/geotech-eng-repository/GDM_Ch-5_Soil_Rock_Classification.pdf
 
 function App() {
   return (
