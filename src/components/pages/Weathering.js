@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { weatheringObj } from "../../utility/smallerObjs";
 import {
-  makeStyles,
+  Divider,
   Paper,
   Button,
   Typography,
@@ -11,18 +11,27 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
-  Checkbox
+  Checkbox,
+  makeStyles,
+  ButtonGroup
 } from "../../utility/themeIndex";
-import { DragHandleTwoTone } from "@material-ui/icons";
+
+const useStyles = makeStyles(theme => ({
+  centerBoxes: {
+    justifyContent: "center"
+  },
+  removeTopmargin: {
+    marginTop: theme.spacing(1)
+  }
+}));
 
 const Weathering = props => {
-  const { card, step, outputStep, handleChange } = props;
+  const classes = useStyles();
+  const { step, outputStep, handleChange } = props;
 
   //values to pass to formCompiler, holds an object for each question, and bool for checked options
   const [boxes, setBoxes] = useState();
-  useEffect(() => {
-    console.log(boxes);
-  }, [boxes]);
+  useEffect(() => {}, [boxes]);
 
   function makeBoxes() {
     //on page load make an object for each question/options
@@ -53,22 +62,23 @@ const Weathering = props => {
     newArrVal.push(newBox[activeTab][target][0], !newBox[activeTab][target][1]);
     newBox[activeTab][target] = newArrVal;
     setBoxes(newBox);
+    console.log(boxes);
   };
 
-  //compile and submit all the selected items
-  const compileCheckBoxes = () => {
-    let newStr = [];
+  const [value, setValue] = useState();
+  useEffect(() => {
     //join each true value in each obj in boxes, with space between
-    boxes.forEach(o => {
-      let tempStr = [];
-      for (let key in o) {
-        o[key][1] == true && tempStr.push(key[0]);
-      }
-      newStr.push(tempStr.join(""));
-    });
-    let joinedStr = newStr.join("-");
-    console.log(joinedStr);
-  };
+    let pushString = "";
+    boxes &&
+      boxes.forEach(o => {
+        let tempStr = [];
+        for (let key in o) {
+          o[key][1] == true && tempStr.push(key[0]);
+        }
+        pushString = pushString + " " + tempStr.join("").toUpperCase();
+      });
+    setValue(pushString);
+  }, [boxes]);
 
   //for each question, 0-3
   const [activeTab, setActiveTab] = useState(0);
@@ -82,24 +92,8 @@ const Weathering = props => {
 
   const allQuestionsArray = weatheringObj.questions;
 
-  const question = <Typography>{weatheringObj.question}</Typography>;
-  const descrip = <Typography>{weatheringObj.descrip}</Typography>;
-
-  const subQuestion = (
-    <Typography>{allQuestionsArray[activeTab].question}</Typography>
-  );
-  const subDescrip = (
-    <Typography>{allQuestionsArray[activeTab].descrip}</Typography>
-  );
-
   const questionsTabs = (
-    <Tabs
-      onChange={handleActiveTab}
-      indicatorColor="primary"
-      textColor="primary"
-      centered
-      value={activeTab}
-    >
+    <Tabs onChange={handleActiveTab} centered value={activeTab}>
       {allQuestionsArray.map((k, index) => (
         <Tab key={index} value={index} label={k.question} />
       ))}
@@ -107,14 +101,15 @@ const Weathering = props => {
   );
 
   const checkBoxes = (
-    <FormControl>
-      <FormGroup>
+    <FormControl component="fieldset">
+      <FormGroup row className={classes.centerBoxes}>
         {boxes &&
           allQuestionsArray[activeTab].options.map(o => (
             <FormControlLabel
               key={o.answer}
               control={
                 <Checkbox
+                  size="small"
                   key={o.name}
                   value={o.name}
                   checked={boxes[activeTab][o.name][1]}
@@ -128,25 +123,38 @@ const Weathering = props => {
     </FormControl>
   );
 
-  //gonig to have to raise checkbox handler to formCompiler, make new utility
-  const sumbitButton = (
-    <Button onClick={() => compileCheckBoxes()}>Submit</Button>
-  );
-  const resetBoxes = (
-    <Button onClick={() => makeBoxes()}>Reset checkboxes</Button>
+  const submitBoxes = value && (
+    <Button
+      variant="outlined"
+      size="large"
+      value={value}
+      onClick={handleChange(value)}
+    >
+      Submit Checkboxes
+    </Button>
   );
 
   return (
     <Slide direction="right" in={step === 8}>
-      <Paper className={card}>
-        {question}
-        {descrip}
+      <Paper variant="outlined" elevation={7}>
+        <Typography variant="h3">{weatheringObj.question}</Typography>
+        <Divider variant="middle" />
+        <Typography variant="h6">{weatheringObj.descrip}</Typography>
         {questionsTabs}
-        {subQuestion}
-        {subDescrip}
+        <Typography variant="body1">
+          {allQuestionsArray[activeTab].descrip}
+        </Typography>
         {checkBoxes}
-        {sumbitButton}
-        {resetBoxes}
+        <ButtonGroup>
+          <Button
+            className={classes.removeTopmargin}
+            variant="text"
+            onClick={() => makeBoxes()}
+          >
+            Reset Checkboxes
+          </Button>
+          {submitBoxes}
+        </ButtonGroup>
       </Paper>
     </Slide>
   );

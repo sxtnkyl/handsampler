@@ -1,31 +1,18 @@
 import React, { useState, useEffect, Fragment } from "react";
 import {
-  makeStyles,
+  Divider,
   Paper,
-  TextField,
   Slide,
   Tabs,
   Tab,
   Typography,
-  Box,
   Button
 } from "../../utility/themeIndex";
 import grainSizeObj from "../../utility/grainSizeObj";
 //import as JSON and parse for increase performance
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    textAlign: "center",
-    paddingTop: theme.spacing(4)
-  },
-  formControl: {
-    margin: theme.spacing(3)
-  }
-}));
-
 const GrainSize = props => {
-  const classes = useStyles();
-  const { card, step, outputStep, handleChange } = props;
+  const { step, outputStep, handleChange } = props;
 
   //end output to put in global state is a group symbol and group name
   const [answer, setAnswer] = useState(null);
@@ -40,17 +27,13 @@ const GrainSize = props => {
   }, [questionLine]);
   //path through grainSizeObj
   const [path, setPath] = useState(grainSizeObj);
-  useEffect(() => {
-    console.log("path called");
-  }, [path]);
+  useEffect(() => {}, [path]);
 
   const combineLine = () => {
-    console.log("combine called", questionLine);
     //going down the question line yields
     //Obj(as value) > options > value > options > value > options > value >>> answer
     //https://stackoverflow.com/questions/6393943/convert-javascript-string-in-dot-notation-into-an-object-reference
     if (questionLine.length) {
-      console.log("has length");
       let newLine = questionLine.reduce((o, i) => o[i], grainSizeObj);
       setPath(newLine);
     }
@@ -58,7 +41,6 @@ const GrainSize = props => {
   };
 
   function pushClick(e) {
-    console.log(e);
     let newLine = [...questionLine];
     newLine.push("options", e);
     setQuestionLine(newLine);
@@ -69,18 +51,8 @@ const GrainSize = props => {
     setTabs(newtab);
   };
 
-  //question made of three parts: the question(currentQuestion), answer options(optionsTab), option description(tabDescrip)
-  //Next submits the value of the selected tab to the questionLine state
-  const currentQuestion = <Typography>{path.question}</Typography>;
-
   const optionsTabs = (
-    <Tabs
-      value={tabs}
-      onChange={handleTabs}
-      indicatorColor="primary"
-      textColor="primary"
-      centered
-    >
+    <Tabs value={tabs} onChange={handleTabs} centered>
       {Object.keys(path.options).map((e, index) => (
         <Tab key={index} label={`${e}`} />
       ))}
@@ -88,35 +60,52 @@ const GrainSize = props => {
   );
 
   const tabDescrip = Object.entries(path.options).map((e, index) => {
+    //if at the end of question tree
     if (index === tabs && e[1].hasOwnProperty("symbol")) {
       let entry = index === tabs && e[1];
       let value = `${entry.name} (${entry.symbol})`;
       return (
-        <Typography key={index} index={index}>
-          The sample group symbol and name is:
-          <Button value={value} onClick={handleChange(e)}>
+        <>
+          <Typography variant="body1" key={e} index={index}>
+            The sample group symbol and name is:
+          </Typography>
+          <Button
+            variant="outlined"
+            size="large"
+            value={value}
+            onClick={handleChange(value)}
+          >
             {value}
           </Button>
-          click to confirm!
-        </Typography>
+          <Typography variant="body1">click to confirm!</Typography>
+        </>
       );
-    } else
+    }
+    //not at the end of the question tree
+    else
       return (
-        <Typography key={index} index={index}>
-          {index === tabs && `${e[1].descrip}`}
+        <>
+          <Typography variant="body1" key={e} index={index}>
+            {index === tabs && `${e[1].descrip}`}
+          </Typography>
           {index === tabs && (
-            <Button key={e[index]} onClick={() => pushClick(e[0])}>
+            <Button
+              variant="text"
+              key={e[index]}
+              onClick={() => pushClick(e[0])}
+            >
               select
             </Button>
           )}
-        </Typography>
+        </>
       );
   });
 
   return (
     <Slide direction="right" in={step === 1}>
-      <Paper className={card}>
-        {currentQuestion}
+      <Paper variant="outlined" elevation={7}>
+        <Typography variant="h3">{path.question}</Typography>
+        <Divider variant="middle" />
         {optionsTabs}
         {tabDescrip}
       </Paper>

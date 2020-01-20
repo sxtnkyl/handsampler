@@ -329,6 +329,7 @@ const grainSizeObj = {
             "<30": {
               question:
                 "Is the sample <15% or 15-25% coarse grained sediments?",
+              descrip: "The sample is <30% coarse sediemnt",
               options: {
                 "<15%": {
                   symbol: "OL/OH",
@@ -336,18 +337,27 @@ const grainSizeObj = {
                 },
                 "15-25%": {
                   question: "Is the sample more sand or gravel?",
+                  descrip: "The sample is 15-25% coarse sediment",
                   options: {
-                    "% sand > % gravel": { name: "organic soil with sand" },
-                    "% sand < % gravel": { name: "organic soil with gravel" }
+                    "% sand > % gravel": {
+                      symbol: "OL/OH",
+                      name: "organic soil with sand"
+                    },
+                    "% sand < % gravel": {
+                      symbol: "OL/OH",
+                      name: "organic soil with gravel"
+                    }
                   }
                 }
               }
             },
             ">30": {
               question: "Is the sample more sand or gravel?",
+              descrip: "The sample is >30% coarse sediemnt",
               options: {
                 "% sand > % gravel": {
                   question: "Is the sample more or less than 15% gravel?",
+                  descrip: "The sample is more sand than gravel",
                   options: {
                     "<15% gravel": {
                       symbol: "OL/OH",
@@ -361,6 +371,7 @@ const grainSizeObj = {
                 },
                 "% sand < % gravel": {
                   question: "Is the sample more or less than 15% gravel?",
+                  descrip: "The sample is more gravel than sand",
                   options: {
                     "<15% sand": {
                       symbol: "OL/OH",
@@ -386,10 +397,12 @@ const grainSizeObj = {
               options: {
                 "<30": {
                   question: "What is the % coarse grain sediment?",
+                  descrip: "The sample is <30% coarse sediment",
                   options: {
                     "<15%": { symbol: "ML", name: "silt" },
                     "15-25%": {
                       question: "Is the sample more sand or gravel?",
+                      descrip: "The sample is 15-25% sand and gravel",
                       options: {
                         "% sand > % gravel": {
                           symbol: "ML",
@@ -405,9 +418,11 @@ const grainSizeObj = {
                 },
                 ">30": {
                   question: "Is the sample more sand or gravel?",
+                  descrip: "The sample is >30% coarse sediment",
                   options: {
                     "% sand > % gravel": {
                       question: "What percent of the sample is gravel?",
+                      descrip: "The sample is more sand than gravel",
                       options: {
                         "<15% gravel": { symbol: "ML", name: "sandy silt" },
                         ">15% gravel": {
@@ -419,6 +434,7 @@ const grainSizeObj = {
                   },
                   "% sand < % gravel": {
                     question: "What percent of the sample is sand?",
+                    descrip: "The sample is more gravel than sand",
                     options: {
                       "<15% sand": { symbol: "ML", name: "gravelly silt" },
                       ">15% sand": {
@@ -434,11 +450,13 @@ const grainSizeObj = {
               descrip: "Medium Plasticity",
               question: "Is the sample > or < 30% coarse sediment?",
               "<30": {
-                question: "What % is coarse grained sediment?",
+                question: "What % of the sample is coarse grained sediment?",
+                descrip: "The sample is <30% coarse sediment",
                 options: {
                   "<15%": { symbol: "CL", name: "lean clay" },
                   "15-25%": {
                     question: "Is the sample more sand or gravel?",
+                    descrip: "The sample is 15-25% coarse sediment",
                     options: {
                       "% sand > % gravel": {
                         symbol: "CL",
@@ -454,9 +472,11 @@ const grainSizeObj = {
               },
               ">30": {
                 question: "Is the sample more sand or gravel?",
+                descrip: "The sample is >30% coarse sediment",
                 options: {
                   "% sand > % gravel": {
                     question: "Does the sample have > or < 15% gravel?",
+                    descrip: "The sample is more sand than gravel",
                     options: {
                       "<15% gravel": {
                         symbol: "CL",
@@ -470,6 +490,7 @@ const grainSizeObj = {
                   },
                   "% sand < % gravel": {
                     question: "Does the sample have > or < 15% sand?",
+                    descrip: "The sample is more gravel than sand",
                     options: {
                       "<15% sand": {
                         symbol: "CL",
@@ -488,11 +509,13 @@ const grainSizeObj = {
               question: "Is the sample > or < 30% coarse sediment?",
               descrip: "High Plastcity",
               "<30": {
-                question: "What % is coarse grained sediment?",
+                question: "What % of the sample is coarse grained sediment?",
+                descrip: "The sample is <30% coarse sediment",
                 options: {
                   "<15%": { symbol: "CH", name: "fat clay" },
                   "15-25%": {
                     question: "Is the sample more sand or gravel?",
+                    descrip: "The sample is 15-25% coarse sediment",
                     options: {
                       "% sand > % gravel": {
                         symbol: "CH",
@@ -508,9 +531,11 @@ const grainSizeObj = {
               },
               ">30": {
                 question: "Is the sample more sand or gravel?",
+                descrip: "The sample is >30% coarse sediment",
                 options: {
                   "% sand > % gravel": {
                     question: "Does the sample have > or < 15% gravel?",
+                    descrip: "The sample is more sand than gravel",
                     options: {
                       "<15% gravel": { symbol: "CH", name: "sandy fat clay" },
                       ">15% gravel": {
@@ -521,6 +546,7 @@ const grainSizeObj = {
                   },
                   "% sand < % gravel": {
                     question: "Does the sample have > or < 15% sand?",
+                    descrip: "The sample is more gravel than sand",
                     options: {
                       "<15% sand": {
                         symbol: "CH",

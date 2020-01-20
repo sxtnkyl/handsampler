@@ -9,33 +9,37 @@ import {
   FormControl,
   FormControlLabel,
   RadioGroup,
-  FormLabel,
-  Radio
+  Divider,
+  Radio,
+  ButtonGroup
 } from "../../utility/themeIndex";
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    textAlign: "center",
-    paddingTop: theme.spacing(4)
+  groupButtons: {
+    margin: "0px 0px"
   },
-  formControl: {
-    margin: theme.spacing(3)
+  centerRadios: {
+    marginTop: theme.spacing(3),
+    justifyContent: "center"
   }
 }));
 
 const Density = props => {
   const classes = useStyles();
-  const { card, step, outputStep, handleChange } = props;
+  const { step, outputStep, handleChange } = props;
 
   //null/dont render radios, true/render coarse, false/render fine
   const [size, setSize] = useState(null);
 
   const [value, setValue] = useState("");
 
+  //https://stackoverflow.com/questions/33680157/how-can-i-get-input-radio-elements-to-horizontally-align-in-react-material-ui
+  //components can inherit properties of parent components
   const nRadios = (
-    <FormControl component="fieldset" className={classes.formControl}>
-      <FormLabel component="legend">N-Value</FormLabel>
+    <FormControl component="fieldset">
       <RadioGroup
+        className={classes.centerRadios}
+        row
         aria-label="n-value"
         name="density"
         value={value}
@@ -55,14 +59,26 @@ const Density = props => {
   );
   return (
     <Slide direction="right" in={step === 3}>
-      <Paper className={`${classes.paper} ${card}`}>
-        <Typography variant="h6">{densityObj.step1}</Typography>
-        <Button onClick={() => setSize(true)} variant="outlined" size="small">
-          Coarse
-        </Button>
-        <Button onClick={() => setSize(false)} variant="outlined" size="small">
-          Fine
-        </Button>
+      <Paper variant="outlined" elevation={7}>
+        <Typography variant="h3">{densityObj.question}</Typography>
+        <Divider variant="middle" />
+        <Typography variant="h6">{densityObj.descrip}</Typography>
+        <ButtonGroup variant="text" orientation="horizontal">
+          <Button
+            className={classes.groupButtons}
+            onClick={() => setSize(true)}
+            size="small"
+          >
+            Coarse
+          </Button>
+          <Button
+            className={classes.groupButtons}
+            onClick={() => setSize(false)}
+            size="small"
+          >
+            Fine
+          </Button>
+        </ButtonGroup>
         {size !== null && nRadios}
       </Paper>
     </Slide>

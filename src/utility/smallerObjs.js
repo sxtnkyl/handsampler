@@ -233,8 +233,8 @@ const densityObj = {
     "16-29": "very stiff",
     ">30": "hard"
   },
-  step1:
-    "A sample's density can be described based on the deposit grains. Is the sample coarse or fine grained?",
+  question: "Is the sample coarse or fine grained?",
+  descrip: "A sample's density can be described based on the deposit grains.",
   step2: "The correct description is the based on the N-Value.",
   nValue:
     "The N value represents a standard value of energy required to penetrate 30 cm into soil by percussion drilling. It is standardized as the energy of a falling hammer from a height of 0,76 m or about 472,95 J. In North America it is considered that the percussion has a 60% energy efficiency, or 283.8J.  As SPT is the most most popular field test, the N value is widely used. Engineers correlate it to granular soils density and clays consistency. The N value is implemented on design using empirical correlations, specially in foundations design. Friction angle, cohesion, stiffness and even the risk of liquefaction can be estimated by the N value correlations."

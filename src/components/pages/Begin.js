@@ -1,23 +1,17 @@
 import React from "react";
-import { makeStyles, Typography, Paper, Slide } from "../../utility/themeIndex";
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    textAlign: "center",
-    paddingTop: theme.spacing(4)
-  }
-}));
+import { Typography, Paper, Slide, Divider } from "../../utility/themeIndex";
 
 const Begin = props => {
-  const classes = useStyles();
-  const { card, step } = props;
+  const { step } = props;
 
   return (
     <Slide direction="right" in={step === 0}>
-      <Paper className={`${classes.paper} ${card}`}>
-        <Typography variant="h2">Let's make a sample!</Typography>
+      <Paper variant="outlined" elevation={7}>
+        <Typography variant="h3">Let's make a sample!</Typography>
+        <Divider variant="middle" />
         <Typography variant="h6">
-          Answer each question and receive the resulting output.
+          Answer each question to produce a sample description at the end of the
+          survey.
         </Typography>
         <Typography variant="h6">
           You can produce the output early by clicking the Finish button.

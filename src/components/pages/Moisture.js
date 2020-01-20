@@ -1,41 +1,63 @@
 import React, { useState, useEffect } from "react";
 import { moistureObj } from "../../utility/smallerObjs";
-import { Paper, Button, Slide, Typography } from "../../utility/themeIndex";
-import { display } from "@material-ui/system";
+import {
+  Paper,
+  Button,
+  Slide,
+  Typography,
+  ButtonGroup,
+  makeStyles,
+  Divider
+} from "../../utility/themeIndex";
+
+const useStyles = makeStyles(theme => ({
+  groupButtons: {
+    margin: theme.spacing(0)
+  }
+}));
 
 const Moisture = props => {
-  const { card, step, outputStep, handleChange } = props;
+  const classes = useStyles();
+  const { step, outputStep, handleChange } = props;
 
+  //obj: {descrip: "", answer: ""}
   const [value, setValue] = useState();
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
+  useEffect(() => {}, [value]);
 
   const options = Object.entries(moistureObj.options).map((o, index) => (
     <Button
+      className={classes.groupButtons}
       onClick={() => setValue(o[1])}
-      variant="outlined"
       size="small"
       key={index}
     >
       {o[0]}
     </Button>
   ));
-  const displayDescrip = value && value.descrip;
+  const displayDescrip = value && (
+    <Typography variant="body1">{value.descrip}</Typography>
+  );
+
   const setButton = value && (
-    <Button value={value.answer} onClick={handleChange(value)}>
+    <Button
+      value={value.answer}
+      variant="outlined"
+      size="large"
+      onClick={handleChange(value)}
+    >
       Set moisture
     </Button>
   );
 
   return (
     <Slide direction="right" in={step === 4}>
-      <Paper className={card}>
-        <Typography>
-          {moistureObj.descrip}
-          {moistureObj.question}
-        </Typography>
-        {options}
+      <Paper variant="outlined" elevation={7}>
+        <Typography variant="h3">{moistureObj.question}</Typography>
+        <Divider variant="middle" />
+        <Typography variant="h6">{moistureObj.descrip}</Typography>
+        <ButtonGroup variant="text" orientation="horizontal">
+          {options}
+        </ButtonGroup>
         {displayDescrip}
         {setButton}
       </Paper>

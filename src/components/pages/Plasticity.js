@@ -6,49 +6,46 @@ import {
   Tab,
   Tabs,
   Typography,
-  Slide
+  Slide,
+  Divider
 } from "../../utility/themeIndex";
 
 const Plasticity = props => {
-  const { card, step, outputStep, handleChange } = props;
-  const [tabs, setTabs] = useState(0);
+  const { step, outputStep, handleChange } = props;
+  const [tabs, setTabs] = useState();
   const handleTabs = (e, newtab) => {
     setTabs(newtab);
   };
   //obj: {descrip, answer}
   const [value, setValue] = useState();
 
-  const question = <Typography>{plasticityObj.question}</Typography>;
-  const descrip = <Typography>{plasticityObj.descrip}</Typography>;
-
   const optionsTabs = (
-    <Tabs
-      value={tabs}
-      onChange={handleTabs}
-      indicatorColor="primary"
-      textColor="primary"
-      centered
-    >
+    <Tabs value={tabs} onChange={handleTabs} centered>
       {Object.entries(plasticityObj.options).map((k, index) => (
         <Tab key={index} label={`${k[0]}`} onClick={() => setValue(k[1])} />
       ))}
     </Tabs>
   );
 
-  const tabDescrip = <Typography>{value && value.descrip}</Typography>;
   const setButton = value && (
-    <Button value={value.answer} onClick={handleChange(value)}>
+    <Button
+      variant="outlined"
+      size="large"
+      value={value.answer}
+      onClick={handleChange(value)}
+    >
       Set moisture
     </Button>
   );
 
   return (
     <Slide direction="right" in={step === 5}>
-      <Paper className={card}>
-        {question}
-        {descrip}
+      <Paper variant="outlined" elevation={7}>
+        <Typography variant="h3">{plasticityObj.question}</Typography>
+        <Divider variant="middle" />
+        <Typography variant="h6">{plasticityObj.descrip}</Typography>
         {optionsTabs}
-        {tabDescrip}
+        <Typography variant="body1">{value && value.descrip}</Typography>
         {setButton}
       </Paper>
     </Slide>

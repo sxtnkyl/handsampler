@@ -1,22 +1,32 @@
 import React from "react";
-import { Paper, TextField, Typography, Slide } from "../../utility/themeIndex";
+import {
+  Paper,
+  TextField,
+  Typography,
+  Slide,
+  Divider
+} from "../../utility/themeIndex";
 
 const StratName = props => {
-  const { card, step, outputStep, handleChange } = props;
+  const { step, outputStep, handleChange } = props;
 
   return (
     <Slide direction="right" in={step === 10}>
-      <Paper className={card}>
+      <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">
           If you have identified the name of the stratigraphic unit, or have a
           custom name, enter it below.
         </Typography>
-        <Typography variant="h6">
+        <Divider variant="middle" />
+        <Typography variant="body1">
           Remember, try to use USGS noomenclature when possible, or assign a
           site-specific custom name which accurately reflects the depositional
           environment or notable features.
         </Typography>
         <TextField
+          variant="filled"
+          multiline={true}
+          rows="6"
           placeholder="change StratName"
           label={outputStep.output}
           onChange={handleChange(outputStep.title)}

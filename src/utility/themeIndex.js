@@ -1,5 +1,7 @@
 import {
   makeStyles,
+  AppBar,
+  IconButton,
   Button,
   Toolbar,
   Paper,
@@ -21,13 +23,26 @@ import {
   Tab,
   Box,
   Checkbox,
-  FormGroup
+  FormGroup,
+  Divider,
+  ButtonGroup
 } from "@material-ui/core";
 
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
+import {
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  RotateLeftRounded,
+  DoneRounded
+} from "@material-ui/icons";
+
+import MenuIcon from "@material-ui/icons/Menu";
+
+import { withStyles } from "@material-ui/core/styles";
 
 export {
   makeStyles,
+  AppBar,
+  IconButton,
   Button,
   Toolbar,
   Paper,
@@ -40,6 +55,7 @@ export {
   Typography,
   KeyboardArrowLeft,
   KeyboardArrowRight,
+  MenuIcon,
   BottomNavigation,
   Slide,
   FormControl,
@@ -51,5 +67,10 @@ export {
   Tab,
   Box,
   Checkbox,
-  FormGroup
+  FormGroup,
+  withStyles,
+  RotateLeftRounded,
+  DoneRounded,
+  Divider,
+  ButtonGroup
 };

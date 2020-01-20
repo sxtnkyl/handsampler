@@ -1,58 +1,35 @@
 import React, { useState, useEffect } from "react";
-import Begin from "./pages/Begin";
-import GrainSize from "./pages/GrainSize";
-import Color from "./pages/Color";
-import Density from "./pages/Density";
-import Moisture from "./pages/Moisture";
-import Plasticity from "./pages/Plasticity";
-import Cohesiveness from "./pages/Cohesiveness";
-import SedimentaryStructure from "./pages/SedimentaryStructure";
-import Weathering from "./pages/Weathering";
-import DepositionalEnv from "./pages/DepositionalEnv";
-import StratName from "./pages/StratName";
-import StratContact from "./pages/StratContact";
-import End from "./pages/End";
+import Begin from "../pages/Begin";
+import GrainSize from "../pages/GrainSize";
+import Color from "../pages/Color";
+import Density from "../pages/Density";
+import Moisture from "../pages/Moisture";
+import Plasticity from "../pages/Plasticity";
+import Cohesiveness from "../pages/Cohesiveness";
+import SedimentaryStructure from "../pages/SedimentaryStructure";
+import Weathering from "../pages/Weathering";
+import DepositionalEnv from "../pages/DepositionalEnv";
+import StratName from "../pages/StratName";
+import StratContact from "../pages/StratContact";
+import End from "../pages/End";
 
 import Header from "./Header";
 import Footer from "./Footer";
 
 import {
-  makeStyles,
   Button,
-  MobileStepper,
   KeyboardArrowLeft,
   KeyboardArrowRight,
-  Grid
-} from "../utility/themeIndex";
-
-const useStyles = makeStyles(theme => ({
-  gridContainer: { minHeight: "100vh", background: "" },
-  card: { background: "", width: "100%" },
-  header: { background: "", width: "80%" },
-  main: {
-    padding: theme.spacing(3),
-    background: "",
-    width: "80%",
-    flex: 1
-  },
-  progress: {
-    padding: theme.spacing(3),
-    background: "",
-    width: "100%"
-  },
-  footer: {
-    width: "80%"
-  }
-}));
+  Container
+} from "../../utility/themeIndex";
 
 const FormCompiler = () => {
-  const classes = useStyles();
   //get component to render
   const questionList = [
     {
       component: Begin,
       title: "Welcome to the Hand Sample Generator!",
-      output: "let's begin"
+      output: ""
     },
     { component: GrainSize, title: "Grain Size", output: "" },
     { component: Color, title: "Color", output: "" },
@@ -97,87 +74,75 @@ const FormCompiler = () => {
     setOutput(questionList);
   }
 
-  const resetButton = (
-    <Button onClick={handleReset} variant="outlined" size="small">
-      reset
-    </Button>
-  );
-  const finishButton = (
-    <Button
-      variant="outlined"
-      size="small"
-      disabled={step === output.length - 1}
-    >
-      finish
-    </Button>
-  );
+  function toFinish() {
+    setStep(output.length - 1);
+  }
+
   const backButton = (
-    <Button onClick={moveBackward} disabled={step === 0}>
+    <Button onClick={moveBackward} variant="contained" disabled={step === 0}>
       <KeyboardArrowLeft />
       backward
     </Button>
   );
   const nextButton = (
-    <Button onClick={moveForward} disabled={step === output.length - 1}>
+    <Button
+      onClick={moveForward}
+      variant="contained"
+      disabled={step === output.length - 1}
+    >
       forward
       <KeyboardArrowRight />
     </Button>
   );
 
+  const disableButton = step === output.length - 1;
+
   const handleChange = input => e => {
     //val const for mui button vs other inputs
-    console.log(e);
     const val = e.currentTarget.value ? e.currentTarget.value : e.target.value;
     setOutput(output, (output[step].output = val));
     console.log(output);
   };
 
+  const [answer, setAnswer] = useState();
+  function generateAnswer() {
+    let answer = [];
+    output.forEach(o => o.output.length && answer.push(o.output));
+    setAnswer(answer.join(", "));
+  }
+
   //renders the active step, gives components access to update output state
   const currentQuestion = React.createElement(
     questionList[step].component,
     {
-      card: classes.card,
       step: step,
       outputStep: output[step],
-      handleChange: handleChange
+      handleChange: handleChange,
+      answer: answer,
+      generateAnswer: generateAnswer,
+      moveForward: moveForward
     },
     null
   );
 
-  const progressBar = (
-    <MobileStepper
-      variant="progress"
-      steps={output.length}
-      position="static"
-      activeStep={step}
-      className={classes.progress}
-      nextButton={nextButton}
-      backButton={backButton}
-    />
-  );
-
   return (
-    <Grid
-      container
-      direction="column"
-      alignItems="center"
-      justify="center"
-      className={classes.gridContainer}
-    >
-      <Grid item className={classes.header}>
-        <Header
-          title={output[step].title}
-          reset={resetButton}
-          finish={finishButton}
-        />
-      </Grid>
-      <Grid container item className={classes.main}>
-        {currentQuestion}
-      </Grid>
-      <Grid item className={classes.footer}>
-        <Footer progress={progressBar} />
-      </Grid>
-    </Grid>
+    <Container disableGutters maxWidth={false}>
+      <Header
+        title={output[step].title}
+        handleReset={handleReset}
+        disableButton={disableButton}
+        toFinish={toFinish}
+      />
+
+      {currentQuestion}
+
+      <Footer
+        steps={output.length}
+        activeStep={step}
+        nextButton={nextButton}
+        backButton={backButton}
+      />
+    </Container>
   );
 };
 
