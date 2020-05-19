@@ -13,29 +13,35 @@ import {
 const Cohesiveness = (props) => {
   const { step, handleChange } = props;
 
-  const [tabs, setTabs] = useState();
+  const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
     setTabs(newtab);
   };
-  //obj: {descrip, answer}
-  const [value, setValue] = useState();
+
+  let value = tabs !== false && cohesivenessObj.options[tabs].answer;
 
   const optionsTabs = (
     <Tabs value={tabs} onChange={handleTabs} centered>
-      {Object.entries(cohesivenessObj.options).map((k, index) => (
-        <Tab key={index} label={`${k[0]}`} onClick={() => setValue(k[1])} />
+      {cohesivenessObj.options.map((e, index) => (
+        <Tab key={index} label={`${e.id}`} />
       ))}
     </Tabs>
   );
 
-  const setButton = value && (
+  const currentDescrip = tabs !== false && (
+    <Typography variant="h6">
+      {cohesivenessObj.options[tabs].descrip}
+    </Typography>
+  );
+
+  const setButton = tabs !== false && (
     <Button
-      variant="outlined"
-      size="large"
-      value={value.answer}
+      variant="contained"
+      size="small"
+      value={value}
       onClick={handleChange(value)}
     >
-      Set moisture
+      Set Cohesiveness
     </Button>
   );
 
@@ -44,9 +50,9 @@ const Cohesiveness = (props) => {
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{cohesivenessObj.question}</Typography>
         <Divider variant="middle" />
-        <Typography variant="h6">{cohesivenessObj.descrip}</Typography>
+        <Typography variant="subtitle1">{cohesivenessObj.descrip}</Typography>
         {optionsTabs}
-        <Typography variant="body1">{value && value.descrip}</Typography>
+        {currentDescrip}
         {setButton}
       </Paper>
     </Slide>

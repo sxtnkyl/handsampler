@@ -5,17 +5,9 @@ import {
   Slide,
   Typography,
   Divider,
-  makeStyles
 } from "../../utility/themeIndex";
 
-const useStyles = makeStyles(theme => ({
-  expand: {
-    flex: 1
-  }
-}));
-
-const Color = props => {
-  const classes = useStyles();
+const Color = (props) => {
   const { step, outputStep, handleChange } = props;
 
   return (
@@ -25,15 +17,11 @@ const Color = props => {
           Enter the colors that best represents the sample.
         </Typography>
         <Divider variant="middle" />
-        <Typography variant="h6">
-          Type all present Munsell scale colors from most to least prevalent
-        </Typography>
         <TextField
-          className={classes.expand}
           variant="filled"
           multiline={true}
           rows="6"
-          placeholder="change color"
+          placeholder="Type all present Munsell scale colors from most to least prevalent"
           label={outputStep.output}
           onChange={handleChange(outputStep.title)}
           defaultValue={outputStep.output}

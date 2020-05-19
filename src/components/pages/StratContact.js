@@ -11,29 +11,35 @@ import {
 
 const StratContact = (props) => {
   const { step, handleChange } = props;
-  const [tabs, setTabs] = useState();
+  const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
     setTabs(newtab);
   };
-  //obj: {descrip, answer}
-  const [value, setValue] = useState();
+
+  let value = tabs !== false && stratContactObj.options[tabs].answer;
 
   const optionsTabs = (
     <Tabs value={tabs} onChange={handleTabs} centered>
       {stratContactObj.options.map((k, index) => (
-        <Tab key={index} label={k.name} onClick={() => setValue(k)} />
+        <Tab key={index} label={k.name} />
       ))}
     </Tabs>
   );
 
-  const setButton = value && (
+  const currentDescrip = tabs !== false && (
+    <Typography variant="h6">
+      {stratContactObj.options[tabs].descrip}
+    </Typography>
+  );
+
+  const setButton = tabs !== false && (
     <Button
-      variant="outlined"
-      size="large"
-      value={value.answer}
+      variant="contained"
+      size="small"
+      value={value}
       onClick={handleChange(value)}
     >
-      Set moisture
+      Set Contact
     </Button>
   );
 
@@ -41,9 +47,9 @@ const StratContact = (props) => {
     <Slide direction="right" in={step === 11}>
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{stratContactObj.question}</Typography>
-        <Typography variant="h6">{stratContactObj.descrip}</Typography>
+        <Typography variant="subtitle1">{stratContactObj.descrip}</Typography>
         {optionsTabs}
-        <Typography variant="body1">{value && value.descrip}</Typography>
+        {currentDescrip}
         {setButton}
       </Paper>
     </Slide>

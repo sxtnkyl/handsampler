@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Divider,
   Paper,
@@ -33,13 +33,16 @@ const GrainSize = (props) => {
   let hasQuestion = path.hasOwnProperty("question");
   let tabHasSymbol = path.options[tabs].hasOwnProperty("symbol");
   let value = tabHasSymbol && path.options[tabs].id;
+  let answer =
+    tabHasSymbol &&
+    path.options[tabs].name.concat(" (", path.options[tabs].symbol, ")");
 
   const currentQuestion = hasQuestion && (
     <Typography variant="h3">{path.question}</Typography>
   );
 
   const currentDescription = path.options[tabs].hasOwnProperty("descrip") && (
-    <Typography variant="body1">{path.options[tabs].descrip}</Typography>
+    <Typography variant="h6">{path.options[tabs].descrip}</Typography>
   );
 
   const optionsTabs = hasOptions && (
@@ -58,13 +61,18 @@ const GrainSize = (props) => {
 
   const endOfLine = (
     <>
-      <Typography variant="body1">
-        The sample group symbol and name is:
+      <Typography variant="subtitle1">
+        The sample group name and symbol is:
       </Typography>
-      <Button variant="outlined" value={value} onClick={handleChange(value)}>
-        {value}
+      <Typography variant="h6">{answer}</Typography>
+      <Button
+        variant="contained"
+        size="small"
+        value={answer}
+        onClick={handleChange(answer)}
+      >
+        Set Grain Size
       </Button>
-      <Typography variant="body1">click to confirm!</Typography>
     </>
   );
 

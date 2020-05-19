@@ -25,14 +25,23 @@ import {
   Checkbox,
   FormGroup,
   Divider,
-  ButtonGroup
+  ButtonGroup,
+  Card,
+  Tooltip,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from "@material-ui/core";
 
 import {
   KeyboardArrowLeft,
   KeyboardArrowRight,
   RotateLeftRounded,
-  DoneRounded
+  DoneRounded,
+  NearMe,
+  MenuOpen,
 } from "@material-ui/icons";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -72,5 +81,14 @@ export {
   RotateLeftRounded,
   DoneRounded,
   Divider,
-  ButtonGroup
+  ButtonGroup,
+  Card,
+  Tooltip,
+  Drawer,
+  NearMe,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  MenuOpen,
 };

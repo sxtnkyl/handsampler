@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Begin from "../pages/Begin";
 import GrainSize from "../pages/GrainSize";
 import Color from "../pages/Color";
@@ -15,20 +15,16 @@ import End from "../pages/End";
 
 import Header from "./Header";
 import Footer from "./Footer";
+import NavDrawer from "./Drawer";
 
-import {
-  Button,
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-  Container,
-} from "../../utility/themeIndex";
+import { Container } from "../../utility/themeIndex";
 
 const FormCompiler = () => {
   //get component to render
   const questionList = [
     {
       component: Begin,
-      title: "Welcome to the Hand Sample Generator!",
+      title: "Start",
       output: "",
     },
     { component: GrainSize, title: "Grain Size", output: "" },
@@ -57,6 +53,7 @@ const FormCompiler = () => {
   const [step, setStep] = useState(0);
   //end output- complete sample description
   const [output, setOutput] = useState(questionList);
+  const [drawer, setDrawer] = useState(false);
 
   //move forward/backward functions
   function moveForward() {
@@ -64,6 +61,10 @@ const FormCompiler = () => {
   }
   function moveBackward() {
     setStep(step - 1);
+  }
+
+  function moveByIndex(i) {
+    setStep(i);
   }
   //resart question line or make new sample
   function handleReset() {
@@ -75,22 +76,9 @@ const FormCompiler = () => {
     setStep(output.length - 1);
   }
 
-  const backButton = (
-    <Button onClick={moveBackward} variant="contained" disabled={step === 0}>
-      <KeyboardArrowLeft />
-      backward
-    </Button>
-  );
-  const nextButton = (
-    <Button
-      onClick={moveForward}
-      variant="contained"
-      disabled={step === output.length - 1}
-    >
-      forward
-      <KeyboardArrowRight />
-    </Button>
-  );
+  function toggleDrawer() {
+    setDrawer(!drawer);
+  }
 
   const disableButton = step === output.length - 1;
 
@@ -104,7 +92,7 @@ const FormCompiler = () => {
   function generateAnswer() {
     let answer = [];
     output.forEach((e) => e.output.length && answer.push(e.output));
-    setAnswer(answer.join(", "));
+    setAnswer(answer.join(", ").toUpperCase());
   }
 
   //dynamically renders the current question component
@@ -121,22 +109,32 @@ const FormCompiler = () => {
     null
   );
 
+  const drawerList = [];
+  questionList.forEach((item) => drawerList.push(item.title));
+
   return (
     <Container maxWidth={false}>
       <Header
+        toggleDrawer={toggleDrawer}
         title={output[step].title}
         handleReset={handleReset}
         disableButton={disableButton}
         toFinish={toFinish}
       />
 
+      <NavDrawer
+        drawerList={drawerList}
+        drawer={drawer}
+        toggleDrawer={toggleDrawer}
+        moveByIndex={moveByIndex}
+      />
       {currentQuestion}
 
       <Footer
         steps={output.length}
         activeStep={step}
-        nextButton={nextButton}
-        backButton={backButton}
+        moveForward={moveForward}
+        moveBackward={moveBackward}
       />
     </Container>
   );

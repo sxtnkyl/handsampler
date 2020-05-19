@@ -27,31 +27,48 @@ const theme = createMuiTheme({
   },
   spacing: defaultTheme.spacing,
   typography: {
-    //h3: currentquestions
+    //h3: card titles
     h3: {
       fontWeight: "800",
       margin: defaultTheme.spacing(3),
     },
-    //h5: appbar
-    //h6:descrips
+    //h5: header/card tabs
+    h5: {
+      color: defaultTheme.palette.secondary.contrastText,
+    },
+    //h6: currentTabDescrips
     h6: {
       marginTop: defaultTheme.spacing(3),
       marginBottom: defaultTheme.spacing(3),
     },
-    //h4: tabs
     button: {
       fontWeight: 550,
+      color: "inherit",
+      paddingLeft: defaultTheme.spacing(1),
+      paddingRight: defaultTheme.spacing(1),
     },
-    //subtitle1: tab descrips
+    //body1:
     body1: {
       marginTop: defaultTheme.spacing(3),
       marginBottom: defaultTheme.spacing(3),
     },
+    //subt1: question descrip
+    subtitle1: {
+      marginBottom: defaultTheme.spacing(3),
+      color: defaultTheme.palette.secondary.light,
+      fontStyle: "italic",
+    },
   },
   overrides: {
+    MuiAppBar: {
+      root: {
+        paddingBottom: defaultTheme.spacing(1),
+      },
+    },
     MuiButton: {
-      //outlined: appbar
+      //header- oulined/medium
       outlined: {
+        color: defaultTheme.palette.secondary.contrastText,
         padding: defaultTheme.spacing(1),
         margin: defaultTheme.spacing(1),
         borderColor: defaultTheme.palette.secondary.contrastText,
@@ -61,13 +78,23 @@ const theme = createMuiTheme({
           backgroundColor: defaultTheme.palette.primary.light,
         },
       },
-      //contained: bottom toolbar nav buttons
+      //contained: footer nav buttons
       contained: {
+        color: defaultTheme.palette.primary.main,
         backgroundColor: defaultTheme.palette.secondary.dark,
-        color: defaultTheme.palette.secondary.contrastText,
         "&:hover": {
           backgroundColor: defaultTheme.palette.secondary.light,
         },
+        "&$disabled": {
+          color: defaultTheme.palette.secondary.light,
+        },
+      },
+      //submit answer button
+      containedSizeSmall: {
+        marginTop: "auto",
+        marginBottom: defaultTheme.spacing(3),
+        width: "30%",
+        alignSelf: "center",
       },
       //text: subquestions in paper
       text: {
@@ -86,9 +113,41 @@ const theme = createMuiTheme({
         justifyContent: "space-between",
       },
     },
-    MuiAppBar: {
+    MuiCard: {
       root: {
-        paddingBottom: defaultTheme.spacing(1),
+        alignSelf: "center",
+        width: "70%",
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        margin: defaultTheme.spacing(3),
+        borderRadius: "4px",
+        // background: "linear-gradient(145deg, #00d659, #00b44b)",
+        // boxShadow: "20px 20px 60px #00aa47, -20px -20px 60px #00e65f",
+        background: defaultTheme.palette.primary.main,
+        // border: `1px solid ${defaultTheme.palette.secondary.main}`,
+        boxShadow: `inset 5px 5px 10px ${defaultTheme.palette.primary.dark}, inset -5px -5px 10px ${defaultTheme.palette.primary.dark}`,
+      },
+    },
+    MuiDrawer: {
+      paperAnchorDockedLeft: {
+        width: "25vw",
+        background: defaultTheme.palette.secondary.dark,
+        color: defaultTheme.palette.secondary.contrastText,
+        borderRight: `2px solid ${defaultTheme.palette.secondary.contrastText}`,
+      },
+    },
+    MuiListItem: {
+      root: {
+        padding: defaultTheme.spacing(0),
+        width: "auto",
+      },
+      button: {
+        borderBottom: `1px solid ${defaultTheme.palette.secondary.light}`,
+        "&:hover": {
+          backgroundColor: defaultTheme.palette.secondary.light,
+        },
       },
     },
     MuiToolbar: {
@@ -117,6 +176,7 @@ const theme = createMuiTheme({
     },
     MuiDivider: {
       root: {
+        marginTop: defaultTheme.spacing(1),
         marginBottom: defaultTheme.spacing(1),
       },
     },
@@ -124,13 +184,28 @@ const theme = createMuiTheme({
       root: {
         color: defaultTheme.palette.secondary.light,
         marginBottom: defaultTheme.spacing(3),
+        "& .MuiTab-textColorInherit.Mui-selected": {
+          color: defaultTheme.palette.secondary.dark,
+        },
       },
       indicator: {
         color: defaultTheme.palette.primary.dark,
       },
     },
+    MuiTab: {
+      wrapper: {
+        fontSize: defaultTheme.typography.h5.fontSize,
+        fontWeight: "600",
+      },
+    },
     MuiTextField: {
-      root: { width: "70%", alignSelf: "center" },
+      root: {
+        marginTop: defaultTheme.spacing(3),
+        width: "70%",
+        alignSelf: "center",
+        margin: defaultTheme.spacing(3),
+        flex: 1,
+      },
     },
     MuiButtonGroup: {
       root: {
@@ -142,7 +217,12 @@ const theme = createMuiTheme({
     MuiButtonBase: {
       root: {
         //change to 1 fixes mobilestepper
-        margin: defaultTheme.spacing(1),
+        margin: defaultTheme.spacing(0),
+      },
+    },
+    MuiTooltip: {
+      tooltip: {
+        fontSize: defaultTheme.typography.subtitle1.fontSize,
       },
     },
     MuiMobileStepper: {
@@ -154,7 +234,12 @@ const theme = createMuiTheme({
       },
       dot: {
         transform: "scale(1.5)",
-        margin: "3px 8px",
+        margin: "0px 8px",
+      },
+    },
+    MuiSvgIcon: {
+      root: {
+        color: "inherit",
       },
     },
   },

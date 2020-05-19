@@ -4,10 +4,10 @@ import {
   TextField,
   Typography,
   Slide,
-  Divider
+  Divider,
 } from "../../utility/themeIndex";
 
-const StratName = props => {
+const StratName = (props) => {
   const { step, outputStep, handleChange } = props;
 
   return (
@@ -18,7 +18,7 @@ const StratName = props => {
           custom name, enter it below.
         </Typography>
         <Divider variant="middle" />
-        <Typography variant="body1">
+        <Typography variant="subtitle1">
           Remember, try to use USGS noomenclature when possible, or assign a
           site-specific custom name which accurately reflects the depositional
           environment or notable features.
@@ -27,7 +27,7 @@ const StratName = props => {
           variant="filled"
           multiline={true}
           rows="6"
-          placeholder="change StratName"
+          placeholder="Change Strat Name"
           label={outputStep.output}
           onChange={handleChange(outputStep.title)}
           defaultValue={outputStep.output}

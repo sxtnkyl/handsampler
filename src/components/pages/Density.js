@@ -11,16 +11,14 @@ import {
   Radio,
   Tabs,
   Tab,
+  Tooltip,
 } from "../../utility/themeIndex";
 
 const Density = (props) => {
   const { step, handleChange } = props;
 
-  const [value, setValue] = useState("");
-
-  const [tabs, setTabs] = useState();
+  const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
-    console.log(newtab, densityObj.options[newtab].values);
     setTabs(newtab);
   };
   const optionsTabs = (
@@ -31,7 +29,9 @@ const Density = (props) => {
     </Tabs>
   );
 
-  const nRadios = tabs >= 0 && (
+  const [value, setValue] = useState("");
+
+  const nRadios = tabs !== false && (
     <FormControl component="fieldset">
       <RadioGroup
         style={{ justifyContent: "center" }}
@@ -58,7 +58,9 @@ const Density = (props) => {
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{densityObj.question}</Typography>
         <Divider variant="middle" />
-        <Typography variant="h6">{densityObj.descrip}</Typography>
+        <Tooltip title={densityObj.nValue} placement="bottom">
+          <Typography variant="subtitle1">{densityObj.descrip}</Typography>
+        </Tooltip>
         {optionsTabs}
         {nRadios}
       </Paper>

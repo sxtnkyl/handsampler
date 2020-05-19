@@ -61,7 +61,7 @@ const Weathering = (props) => {
       boxes.forEach((o) => {
         let tempStr = [];
         for (let key in o) {
-          o[key][1] == true && tempStr.push(key[0]);
+          o[key][1] === true && tempStr.push(key[0]);
         }
         pushString = pushString + " " + tempStr.join("").toUpperCase();
       });
@@ -97,7 +97,7 @@ const Weathering = (props) => {
                 onChange={(e) => handleBoxes(e)}
               />
             }
-            label={`${o.name}: ${o.descrip}`}
+            label={`${o.name.toUpperCase()}: ${o.descrip}`}
           />
         ))}
       </FormGroup>
@@ -105,21 +105,19 @@ const Weathering = (props) => {
   );
 
   const resetBoxes = (
-    <Button onClick={() => makeBoxes} variant="outlined" size="medium">
+    <Button onClick={() => makeBoxes} variant="text">
       <RotateLeftRounded />
       <Typography variant="button">Reset Checkboxes</Typography>
     </Button>
   );
   const submitBoxes = (
     <Button
-      variant="outlined"
-      size="large"
+      variant="contained"
+      size="small"
       value={value}
       onClick={handleChange(value)}
-      disabled={boxes}
     >
-      <DoneRounded />
-      <Typography variant="button">SubmitBoxes</Typography>
+      <Typography variant="button">Submit features</Typography>
     </Button>
   );
 
@@ -128,9 +126,9 @@ const Weathering = (props) => {
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{weatheringObj.question}</Typography>
         <Divider variant="middle" />
-        <Typography variant="h6">{weatheringObj.descrip}</Typography>
+        <Typography variant="subtitle1">{weatheringObj.descrip}</Typography>
         {optionsTabs}
-        <Typography variant="body1">
+        <Typography variant="h6">
           {weatheringObj.questions[activeTab].descrip}
         </Typography>
         {checkBoxes}

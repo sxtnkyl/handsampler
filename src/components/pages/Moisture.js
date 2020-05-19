@@ -8,35 +8,36 @@ import {
   Divider,
   Tab,
   Tabs,
+  Card,
 } from "../../utility/themeIndex";
 
 const Moisture = (props) => {
   const { step, handleChange } = props;
 
-  const [tabs, setTabs] = useState();
+  const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
     setTabs(newtab);
   };
-  //obj: {descrip, id}
-  const [value, setValue] = useState();
+
+  let value = tabs !== false && moistureObj.options[tabs].id;
 
   const optionsTabs = (
     <Tabs value={tabs} onChange={handleTabs} centered>
       {moistureObj.options.map((k, index) => (
-        <Tab key={index} label={`${k.id}`} onClick={() => setValue(index)} />
+        <Tab key={index} label={`${k.id}`} />
       ))}
     </Tabs>
   );
 
-  const displayDescrip = tabs >= 0 && (
-    <Typography variant="body1">{moistureObj.options[tabs].descrip}</Typography>
+  const currentDescrip = tabs !== false && (
+    <Typography variant="h6">{moistureObj.options[tabs].descrip}</Typography>
   );
 
-  const setButton = tabs >= 0 && (
+  const setButton = tabs !== false && (
     <Button
-      value={value.id}
-      variant="outlined"
-      size="large"
+      value={value}
+      variant="contained"
+      size="small"
       onClick={handleChange(value)}
     >
       Set moisture
@@ -48,9 +49,9 @@ const Moisture = (props) => {
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{moistureObj.question}</Typography>
         <Divider variant="middle" />
-        <Typography variant="h6">{moistureObj.descrip}</Typography>
+        <Typography variant="subtitle1">{moistureObj.descrip}</Typography>
         {optionsTabs}
-        {displayDescrip}
+        {currentDescrip}
         {setButton}
       </Paper>
     </Slide>

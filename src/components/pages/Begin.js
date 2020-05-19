@@ -1,13 +1,15 @@
 import React from "react";
 import { Typography, Paper, Slide, Divider } from "../../utility/themeIndex";
 
-const Begin = props => {
+const Begin = (props) => {
   const { step } = props;
 
   return (
     <Slide direction="right" in={step === 0}>
       <Paper variant="outlined" elevation={7}>
-        <Typography variant="h3">Let's make a sample!</Typography>
+        <Typography variant="h3">
+          Welcome to the Hand Sample Generator!
+        </Typography>
         <Divider variant="middle" />
         <Typography variant="h6">
           Answer each question to produce a sample description at the end of the

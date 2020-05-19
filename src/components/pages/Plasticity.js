@@ -12,29 +12,33 @@ import {
 
 const Plasticity = (props) => {
   const { step, handleChange } = props;
-  const [tabs, setTabs] = useState();
+  const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
     setTabs(newtab);
   };
-  //obj: {descrip, answer}
-  const [value, setValue] = useState();
+
+  let value = tabs !== false && plasticityObj.options[tabs].answer;
 
   const optionsTabs = (
     <Tabs value={tabs} onChange={handleTabs} centered>
-      {Object.entries(plasticityObj.options).map((k, index) => (
-        <Tab key={index} label={`${k[0]}`} onClick={() => setValue(k[1])} />
+      {plasticityObj.options.map((k, index) => (
+        <Tab key={index} label={`${k.id}`} />
       ))}
     </Tabs>
   );
 
+  const currentDescrip = tabs !== false && (
+    <Typography variant="h6">{plasticityObj.options[tabs].descrip}</Typography>
+  );
+
   const setButton = value && (
     <Button
-      variant="outlined"
-      size="large"
-      value={value.answer}
+      variant="contained"
+      size="small"
+      value={value}
       onClick={handleChange(value)}
     >
-      Set moisture
+      Set Plasticity
     </Button>
   );
 
@@ -43,9 +47,9 @@ const Plasticity = (props) => {
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{plasticityObj.question}</Typography>
         <Divider variant="middle" />
-        <Typography variant="h6">{plasticityObj.descrip}</Typography>
+        <Typography variant="subtitle1">{plasticityObj.descrip}</Typography>
         {optionsTabs}
-        <Typography variant="body1">{value && value.descrip}</Typography>
+        {currentDescrip}
         {setButton}
       </Paper>
     </Slide>

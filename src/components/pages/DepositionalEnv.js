@@ -4,10 +4,10 @@ import {
   TextField,
   Typography,
   Slide,
-  Divider
+  Divider,
 } from "../../utility/themeIndex";
 
-const DepositionalEnv = props => {
+const DepositionalEnv = (props) => {
   const { step, outputStep, handleChange } = props;
 
   //add a dropdown component of various depenvs to choose from
@@ -20,14 +20,11 @@ const DepositionalEnv = props => {
           If you have deduced the depositional environment, enter in below.
         </Typography>
         <Divider variant="middle" />
-        <Typography variant="h6">
-          Here are some common depositional descriptors.
-        </Typography>
         <TextField
           variant="filled"
           multiline={true}
           rows="6"
-          placeholder="change Depositional Environment"
+          placeholder="Change Depositional Environment"
           label={outputStep.output}
           onChange={handleChange(outputStep.title)}
           defaultValue={outputStep.output}

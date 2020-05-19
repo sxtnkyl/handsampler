@@ -1,37 +1,3 @@
-//FUTURE REFACTOR: change smaller objects to an array of objects
-//EXAMPLE:
-// options: {
-//   dry: {
-//     descrip: "There is no water. Sample is dry.",
-//     answer: "Dry"
-//   },
-//   moist: {
-//     descrip: "The sample is slightly wet.",
-//     answer: "Moist"
-//   },
-//   wet: {
-//     descrip: "Water is visible and saturates the sample.",
-//     answer: "Wet"
-//   }
-// }
-
-//to.....
-
-// options: [
-//   {
-//     descrip: "There is no water. Sample is dry.",
-//     answer: "Dry"
-//   },
-//   {
-//     descrip: "The sample is slightly wet.",
-//     answer: "Moist"
-//   },
-//   {
-//     descrip: "Water is visible and saturates the sample.",
-//     answer: "Wet"
-//   }
-// ]
-
 const moistureObj = {
   descrip: "Moisture is a measure of liquid in a sample.",
   question: "How much moisture is in the sample?",
@@ -57,72 +23,80 @@ const plasticityObj = {
   descrip:
     "The plasticity can be attributed to the rolling technique. This is the ability of a cylindrical roll of soil rolled between the fingers to hold a 6, 4, or 2mm diameter.",
   question: "What is the plasticity of the sample?",
-  options: {
-    non: {
+  options: [
+    {
+      id: "non",
       descrip: "Will NOT support a 6mm roll",
       answer: "Non-plastic",
     },
-    low: {
+    {
+      id: "low",
       descrip: "Can support a 6mm roll, but not 4mm",
       answer: "Low Plasticity",
     },
-    medium: {
+    {
+      id: "medium",
       descrip: "Can support a 4mm roll, but not 2mm",
       answer: "Medium Plasticity",
     },
-    high: {
+    {
+      id: "high",
       descrip: "Can support a 2mm roll",
       answer: "High Plasticity",
     },
-  },
+  ],
 };
 
-//tabs
 const cohesivenessObj = {
   descrip:
     "Cohesion is the component of shear strength and property applied to clay containing soils.",
   question: "Does the sample exhibit cohesion?",
-  options: {
-    yes: {
+  options: [
+    {
+      id: "yes",
       descrip: "The sample can form a 6mm diamter with the roll test",
       answer: "Cohesive",
     },
-    no: {
+    {
+      id: "no",
       descrip: "The sample can NOT form a 6mm diamter with the roll test",
       answer: "Noncohesive",
     },
-  },
+  ],
 };
 
 //https://en.wikipedia.org/wiki/Sedimentary_structures
-//checkboxes for multiple sed structures
-//modals for descriptions
 const sedimentaryStructureObj = {
   descrip:
     "Having a sedimentary structure suggests the sample contains bedding from deposition.",
   question: "Which sedimentary structure, if any, apply to the sample?",
-  options: {
-    massive: {
+  options: [
+    {
+      id: "massive",
       descrip: "The stratification is thick and homogeneous.",
       answer: "Massive",
     },
-    thick: {
+    {
+      id: "thick",
       descrip: "Beds are >30cm",
       answer: "Thickly Bedded",
     },
-    bedded: {
+    {
+      id: "bedded",
       descrip: "Beds are 3-30cm",
       answer: "Bedded",
     },
-    thin: {
+    {
+      id: "thin",
       descrip: "Beds are 0.5-30cm",
       answer: "Thinly Bedded",
     },
-    laminated: {
+    {
+      id: "laminated",
       descrip: "Beds are <0.5cm",
       answer: "Laminated",
     },
-  },
+  ],
 };
 
 const weatheringObj = {
@@ -217,8 +191,8 @@ const colorObj = {
 
 const densityObj = {
   question: "Is the sample coarse or fine grained?",
-  descrip: "A sample's density can be described based on the deposit grains.",
-  step2: "The correct description is the based on the N-Value.",
+  descrip:
+    "Correct terminology for a sample's density can be described based on the deposited grain sizes and corresponding N-value.",
   nValue:
     "The N value represents a standard value of energy required to penetrate 30 cm into soil by percussion drilling. It is standardized as the energy of a falling hammer from a height of 0,76 m or about 472,95 J. In North America it is considered that the percussion has a 60% energy efficiency, or 283.8J.  As SPT is the most most popular field test, the N value is widely used. Engineers correlate it to granular soils density and clays consistency. The N value is implemented on design using empirical correlations, specially in foundations design. Friction angle, cohesion, stiffness and even the risk of liquefaction can be estimated by the N value correlations.",
   options: [
