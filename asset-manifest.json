@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/handsampler/static/css/main.f56537d3.chunk.css",
+    "main.js": "/handsampler/static/js/main.9614761e.chunk.js",
+    "main.js.map": "/handsampler/static/js/main.9614761e.chunk.js.map",
+    "runtime-main.js": "/handsampler/static/js/runtime-main.ec3a5d73.js",
+    "runtime-main.js.map": "/handsampler/static/js/runtime-main.ec3a5d73.js.map",
+    "static/js/2.459e0d9c.chunk.js": "/handsampler/static/js/2.459e0d9c.chunk.js",
+    "static/js/2.459e0d9c.chunk.js.map": "/handsampler/static/js/2.459e0d9c.chunk.js.map",
+    "index.html": "/handsampler/index.html",
+    "precache-manifest.3b2105bc219710b3865cd38f8b2e2610.js": "/handsampler/precache-manifest.3b2105bc219710b3865cd38f8b2e2610.js",
+    "service-worker.js": "/handsampler/service-worker.js",
+    "static/css/main.f56537d3.chunk.css.map": "/handsampler/static/css/main.f56537d3.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ec3a5d73.js",
+    "static/js/2.459e0d9c.chunk.js",
+    "static/css/main.f56537d3.chunk.css",
+    "static/js/main.9614761e.chunk.js"
+  ]
+}
