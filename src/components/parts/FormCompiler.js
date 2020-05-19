@@ -77,7 +77,7 @@ const FormCompiler = () => {
   }
 
   function toggleDrawer() {
-    setDrawer(!drawer);
+    setDrawer((prev) => !prev);
   }
 
   const disableButton = step === output.length - 1;
@@ -86,10 +86,12 @@ const FormCompiler = () => {
     //button vs text inputs
     const val = e.currentTarget.value ? e.currentTarget.value : e.target.value;
     setOutput(output, (output[step].output = val));
+    moveForward();
   };
 
   const [answer, setAnswer] = useState();
   function generateAnswer() {
+    console.log(output);
     let answer = [];
     output.forEach((e) => e.output.length && answer.push(e.output));
     setAnswer(answer.join(", ").toUpperCase());

@@ -33,14 +33,14 @@ const Moisture = (props) => {
     <Typography variant="h6">{moistureObj.options[tabs].descrip}</Typography>
   );
 
-  const setButton = tabs !== false && (
+  const submitMoisture = tabs !== false && (
     <Button
       value={value}
       variant="contained"
       size="small"
       onClick={handleChange(value)}
     >
-      Set moisture
+      Submit moisture
     </Button>
   );
 
@@ -50,9 +50,10 @@ const Moisture = (props) => {
         <Typography variant="h3">{moistureObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="subtitle1">{moistureObj.descrip}</Typography>
+        <Divider variant="middle" />
         {optionsTabs}
         {currentDescrip}
-        {setButton}
+        {submitMoisture}
       </Paper>
     </Slide>
   );

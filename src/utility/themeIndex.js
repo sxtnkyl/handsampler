@@ -33,6 +33,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  ClickAwayListener,
 } from "@material-ui/core";
 
 import {
@@ -91,4 +92,5 @@ export {
   ListItemIcon,
   ListItemText,
   MenuOpen,
+  ClickAwayListener,
 };

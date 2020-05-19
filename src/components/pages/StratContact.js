@@ -7,6 +7,7 @@ import {
   Tabs,
   Tab,
   Slide,
+  Divider,
 } from "../../utility/themeIndex";
 
 const StratContact = (props) => {
@@ -32,14 +33,14 @@ const StratContact = (props) => {
     </Typography>
   );
 
-  const setButton = tabs !== false && (
+  const submitContact = tabs !== false && (
     <Button
       variant="contained"
       size="small"
       value={value}
       onClick={handleChange(value)}
     >
-      Set Contact
+      Submit Contact
     </Button>
   );
 
@@ -47,10 +48,12 @@ const StratContact = (props) => {
     <Slide direction="right" in={step === 11}>
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{stratContactObj.question}</Typography>
+        <Divider />
         <Typography variant="subtitle1">{stratContactObj.descrip}</Typography>
+        <Divider />
         {optionsTabs}
         {currentDescrip}
-        {setButton}
+        {submitContact}
       </Paper>
     </Slide>
   );

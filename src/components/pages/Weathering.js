@@ -105,7 +105,7 @@ const Weathering = (props) => {
   );
 
   const resetBoxes = (
-    <Button onClick={() => makeBoxes} variant="text">
+    <Button onClick={makeBoxes} variant="text" style={{ marginBottom: "16px" }}>
       <RotateLeftRounded />
       <Typography variant="button">Reset Checkboxes</Typography>
     </Button>
@@ -127,6 +127,7 @@ const Weathering = (props) => {
         <Typography variant="h3">{weatheringObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="subtitle1">{weatheringObj.descrip}</Typography>
+        <Divider variant="middle" />
         {optionsTabs}
         <Typography variant="h6">
           {weatheringObj.questions[activeTab].descrip}

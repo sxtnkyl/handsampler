@@ -54,7 +54,7 @@ const theme = createMuiTheme({
     },
     //subt1: question descrip
     subtitle1: {
-      marginBottom: defaultTheme.spacing(3),
+      marginBottom: defaultTheme.spacing(0),
       color: defaultTheme.palette.secondary.light,
       fontStyle: "italic",
     },
@@ -92,7 +92,7 @@ const theme = createMuiTheme({
       //submit answer button
       containedSizeSmall: {
         marginTop: "auto",
-        marginBottom: defaultTheme.spacing(3),
+        marginBottom: "auto",
         width: "30%",
         alignSelf: "center",
       },
@@ -111,23 +111,6 @@ const theme = createMuiTheme({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-      },
-    },
-    MuiCard: {
-      root: {
-        alignSelf: "center",
-        width: "70%",
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-around",
-        margin: defaultTheme.spacing(3),
-        borderRadius: "4px",
-        // background: "linear-gradient(145deg, #00d659, #00b44b)",
-        // boxShadow: "20px 20px 60px #00aa47, -20px -20px 60px #00e65f",
-        background: defaultTheme.palette.primary.main,
-        // border: `1px solid ${defaultTheme.palette.secondary.main}`,
-        boxShadow: `inset 5px 5px 10px ${defaultTheme.palette.primary.dark}, inset -5px -5px 10px ${defaultTheme.palette.primary.dark}`,
       },
     },
     MuiDrawer: {
@@ -169,8 +152,7 @@ const theme = createMuiTheme({
         flexDirection: "column",
         marginTop: defaultTheme.spacing(3),
         marginBottom: defaultTheme.spacing(3),
-        paddingLeft: "8%",
-        paddingRight: "8%",
+        padding: `${defaultTheme.spacing(3)}px ${defaultTheme.spacing(6)}px`,
         boxShadow: `10px 10px 10px ${defaultTheme.palette.secondary.dark}, -10px -10px 10px ${defaultTheme.palette.secondary.dark}`,
       },
     },
@@ -204,7 +186,6 @@ const theme = createMuiTheme({
         width: "70%",
         alignSelf: "center",
         margin: defaultTheme.spacing(3),
-        flex: 1,
       },
     },
     MuiButtonGroup: {

@@ -11,7 +11,7 @@ import {
 } from "../../utility/themeIndex";
 
 const Cohesiveness = (props) => {
-  const { step, handleChange } = props;
+  const { step, handleChange, moveForward } = props;
 
   const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
@@ -34,14 +34,14 @@ const Cohesiveness = (props) => {
     </Typography>
   );
 
-  const setButton = tabs !== false && (
+  const submitCohesion = tabs !== false && (
     <Button
       variant="contained"
       size="small"
       value={value}
       onClick={handleChange(value)}
     >
-      Set Cohesiveness
+      Submit Cohesiveness
     </Button>
   );
 
@@ -51,9 +51,10 @@ const Cohesiveness = (props) => {
         <Typography variant="h3">{cohesivenessObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="subtitle1">{cohesivenessObj.descrip}</Typography>
+        <Divider variant="middle" />
         {optionsTabs}
         {currentDescrip}
-        {setButton}
+        {submitCohesion}
       </Paper>
     </Slide>
   );

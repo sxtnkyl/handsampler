@@ -31,14 +31,14 @@ const Plasticity = (props) => {
     <Typography variant="h6">{plasticityObj.options[tabs].descrip}</Typography>
   );
 
-  const setButton = value && (
+  const submitPlasticity = value && (
     <Button
       variant="contained"
       size="small"
       value={value}
       onClick={handleChange(value)}
     >
-      Set Plasticity
+      Submit Plasticity
     </Button>
   );
 
@@ -48,9 +48,10 @@ const Plasticity = (props) => {
         <Typography variant="h3">{plasticityObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="subtitle1">{plasticityObj.descrip}</Typography>
+        <Divider variant="middle" />
         {optionsTabs}
         {currentDescrip}
-        {setButton}
+        {submitPlasticity}
       </Paper>
     </Slide>
   );

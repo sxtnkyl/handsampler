@@ -21,7 +21,7 @@ const SedimentaryStructure = (props) => {
   let value = tabs !== false && sedimentaryStructureObj.options[tabs].answer;
 
   const optionsTabs = (
-    <Tabs value={tabs} onChange={handleTabs} centered variant="scrollable">
+    <Tabs value={tabs} onChange={handleTabs} centered>
       {sedimentaryStructureObj.options.map((k, index) => (
         <Tab key={index} label={`${k.id}`} />
       ))}
@@ -34,14 +34,14 @@ const SedimentaryStructure = (props) => {
     </Typography>
   );
 
-  const setButton = tabs !== false && (
+  const submitStructure = tabs !== false && (
     <Button
       variant="contained"
       size="small"
       value={value}
       onClick={handleChange(value)}
     >
-      Set structure
+      Submit structure
     </Button>
   );
 
@@ -53,9 +53,10 @@ const SedimentaryStructure = (props) => {
         <Typography variant="subtitle1">
           {sedimentaryStructureObj.descrip}
         </Typography>
+        <Divider variant="middle" />
         {optionsTabs}
         {currentDescrip}
-        {setButton}
+        {submitStructure}
       </Paper>
     </Slide>
   );

@@ -35,7 +35,9 @@ const GrainSize = (props) => {
   let value = tabHasSymbol && path.options[tabs].id;
   let answer =
     tabHasSymbol &&
-    path.options[tabs].name.concat(" (", path.options[tabs].symbol, ")");
+    path.options[tabs].name
+      .concat(" (", path.options[tabs].symbol, ")")
+      .toUpperCase();
 
   const currentQuestion = hasQuestion && (
     <Typography variant="h3">{path.question}</Typography>
@@ -71,7 +73,7 @@ const GrainSize = (props) => {
         value={answer}
         onClick={handleChange(answer)}
       >
-        Set Grain Size
+        Submit Grain Size
       </Button>
     </>
   );

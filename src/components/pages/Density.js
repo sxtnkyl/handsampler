@@ -12,6 +12,7 @@ import {
   Tabs,
   Tab,
   Tooltip,
+  Button,
 } from "../../utility/themeIndex";
 
 const Density = (props) => {
@@ -30,6 +31,9 @@ const Density = (props) => {
   );
 
   const [value, setValue] = useState("");
+  const handleRadioSelect = (e) => {
+    setValue(e.target.value);
+  };
 
   const nRadios = tabs !== false && (
     <FormControl component="fieldset">
@@ -47,12 +51,24 @@ const Density = (props) => {
             value={e.descrip}
             control={<Radio />}
             label={`${e.n}: ${e.descrip}`}
-            onClick={handleChange(value)}
+            onClick={handleRadioSelect}
           />
         ))}
       </RadioGroup>
     </FormControl>
   );
+
+  const submitDensity = (
+    <Button
+      variant="contained"
+      size="small"
+      value={value}
+      onClick={handleChange(value)}
+    >
+      <Typography variant="button">Submit Density</Typography>
+    </Button>
+  );
+
   return (
     <Slide direction="right" in={step === 3}>
       <Paper variant="outlined" elevation={7}>
@@ -61,8 +77,10 @@ const Density = (props) => {
         <Tooltip title={densityObj.nValue} placement="bottom">
           <Typography variant="subtitle1">{densityObj.descrip}</Typography>
         </Tooltip>
+        <Divider variant="middle" />
         {optionsTabs}
         {nRadios}
+        {submitDensity}
       </Paper>
     </Slide>
   );
