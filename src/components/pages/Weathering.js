@@ -12,26 +12,15 @@ import {
   FormControlLabel,
   FormGroup,
   Checkbox,
-  makeStyles,
-  ButtonGroup
+  RotateLeftRounded,
+  DoneRounded,
 } from "../../utility/themeIndex";
 
-const useStyles = makeStyles(theme => ({
-  centerBoxes: {
-    justifyContent: "center"
-  },
-  removeTopmargin: {
-    marginTop: theme.spacing(1)
-  }
-}));
+const Weathering = (props) => {
+  const { step, handleChange } = props;
 
-const Weathering = props => {
-  const classes = useStyles();
-  const { step, outputStep, handleChange } = props;
-
-  //values to pass to formCompiler, holds an object for each question, and bool for checked options
+  //array of objects(an object for each question), with key(name) and value(arr["letter", checked(bool)])
   const [boxes, setBoxes] = useState();
-  useEffect(() => {}, [boxes]);
 
   function makeBoxes() {
     //on page load make an object for each question/options
@@ -45,7 +34,7 @@ const Weathering = props => {
     }
     weatheringObj.questions.forEach((q, index) => {
       let opts = q.options;
-      opts.forEach(o => (allQs[index][o.name] = [o.answer, false]));
+      opts.forEach((o) => (allQs[index][o.name] = [o.answer, false]));
     });
     setBoxes(allQs);
   }
@@ -54,7 +43,7 @@ const Weathering = props => {
     makeBoxes();
   }, []);
 
-  const handleBoxes = e => {
+  const handleBoxes = (e) => {
     //ie: target = "C"
     let target = e.target.value;
     let newBox = [...boxes];
@@ -62,7 +51,6 @@ const Weathering = props => {
     newArrVal.push(newBox[activeTab][target][0], !newBox[activeTab][target][1]);
     newBox[activeTab][target] = newArrVal;
     setBoxes(newBox);
-    console.log(boxes);
   };
 
   const [value, setValue] = useState();
@@ -70,7 +58,7 @@ const Weathering = props => {
     //join each true value in each obj in boxes, with space between
     let pushString = "";
     boxes &&
-      boxes.forEach(o => {
+      boxes.forEach((o) => {
         let tempStr = [];
         for (let key in o) {
           o[key][1] == true && tempStr.push(key[0]);
@@ -80,57 +68,58 @@ const Weathering = props => {
     setValue(pushString);
   }, [boxes]);
 
-  //for each question, 0-3
   const [activeTab, setActiveTab] = useState(0);
-  useEffect(() => {
-    // console.log(activeTab);
-  }, [activeTab]);
 
   const handleActiveTab = (e, newtab) => {
     setActiveTab(newtab);
   };
 
-  const allQuestionsArray = weatheringObj.questions;
-
-  const questionsTabs = (
-    <Tabs onChange={handleActiveTab} centered value={activeTab}>
-      {allQuestionsArray.map((k, index) => (
+  const optionsTabs = (
+    <Tabs onChange={handleActiveTab} value={activeTab} variant="scrollable">
+      {weatheringObj.questions.map((k, index) => (
         <Tab key={index} value={index} label={k.question} />
       ))}
     </Tabs>
   );
 
-  const checkBoxes = (
+  const checkBoxes = boxes && (
     <FormControl component="fieldset">
-      <FormGroup row className={classes.centerBoxes}>
-        {boxes &&
-          allQuestionsArray[activeTab].options.map(o => (
-            <FormControlLabel
-              key={o.answer}
-              control={
-                <Checkbox
-                  size="small"
-                  key={o.name}
-                  value={o.name}
-                  checked={boxes[activeTab][o.name][1]}
-                  onChange={e => handleBoxes(e)}
-                />
-              }
-              label={`${o.name}: ${o.descrip}`}
-            />
-          ))}
+      <FormGroup row style={{ justifyContent: "center" }}>
+        {weatheringObj.questions[activeTab].options.map((o) => (
+          <FormControlLabel
+            key={o.answer}
+            control={
+              <Checkbox
+                size="small"
+                key={o.name}
+                value={o.name}
+                checked={boxes[activeTab][o.name][1]}
+                onChange={(e) => handleBoxes(e)}
+              />
+            }
+            label={`${o.name}: ${o.descrip}`}
+          />
+        ))}
       </FormGroup>
     </FormControl>
   );
 
-  const submitBoxes = value && (
+  const resetBoxes = (
+    <Button onClick={() => makeBoxes} variant="outlined" size="medium">
+      <RotateLeftRounded />
+      <Typography variant="button">Reset Checkboxes</Typography>
+    </Button>
+  );
+  const submitBoxes = (
     <Button
       variant="outlined"
       size="large"
       value={value}
       onClick={handleChange(value)}
+      disabled={boxes}
     >
-      Submit Checkboxes
+      <DoneRounded />
+      <Typography variant="button">SubmitBoxes</Typography>
     </Button>
   );
 
@@ -140,21 +129,13 @@ const Weathering = props => {
         <Typography variant="h3">{weatheringObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="h6">{weatheringObj.descrip}</Typography>
-        {questionsTabs}
+        {optionsTabs}
         <Typography variant="body1">
-          {allQuestionsArray[activeTab].descrip}
+          {weatheringObj.questions[activeTab].descrip}
         </Typography>
         {checkBoxes}
-        <ButtonGroup>
-          <Button
-            className={classes.removeTopmargin}
-            variant="text"
-            onClick={() => makeBoxes()}
-          >
-            Reset Checkboxes
-          </Button>
-          {submitBoxes}
-        </ButtonGroup>
+        {resetBoxes}
+        {submitBoxes}
       </Paper>
     </Slide>
   );

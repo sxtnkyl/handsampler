@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { cohesivenessObj } from "../../utility/smallerObjs";
 import {
   Divider,
@@ -7,11 +7,11 @@ import {
   Typography,
   Tab,
   Tabs,
-  Slide
+  Slide,
 } from "../../utility/themeIndex";
 
-const Cohesiveness = props => {
-  const { step, outputStep, handleChange } = props;
+const Cohesiveness = (props) => {
+  const { step, handleChange } = props;
 
   const [tabs, setTabs] = useState();
   const handleTabs = (e, newtab) => {

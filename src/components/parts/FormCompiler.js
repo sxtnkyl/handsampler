@@ -20,7 +20,7 @@ import {
   Button,
   KeyboardArrowLeft,
   KeyboardArrowRight,
-  Container
+  Container,
 } from "../../utility/themeIndex";
 
 const FormCompiler = () => {
@@ -29,7 +29,7 @@ const FormCompiler = () => {
     {
       component: Begin,
       title: "Welcome to the Hand Sample Generator!",
-      output: ""
+      output: "",
     },
     { component: GrainSize, title: "Grain Size", output: "" },
     { component: Color, title: "Color", output: "" },
@@ -40,26 +40,23 @@ const FormCompiler = () => {
     {
       component: SedimentaryStructure,
       title: "Sedimentary Structure",
-      output: ""
+      output: "",
     },
     { component: Weathering, title: "Weathering", output: "" },
     {
       component: DepositionalEnv,
       title: "Depositional Environment",
-      output: ""
+      output: "",
     },
     { component: StratName, title: "Stratigraphic Name", output: "" },
     { component: StratContact, title: "Stratigraphic Contact", output: "" },
-    { component: End, title: "Finish", output: "" }
+    { component: End, title: "Finish", output: "" },
   ];
 
   //step corresponds to questionComponentList index, and therefore output index to match
   const [step, setStep] = useState(0);
   //end output- complete sample description
   const [output, setOutput] = useState(questionList);
-  useEffect(() => {
-    console.log(output);
-  }, [output]);
 
   //move forward/backward functions
   function moveForward() {
@@ -97,21 +94,20 @@ const FormCompiler = () => {
 
   const disableButton = step === output.length - 1;
 
-  const handleChange = input => e => {
-    //val const for mui button vs other inputs
+  const handleChange = (input) => (e) => {
+    //button vs text inputs
     const val = e.currentTarget.value ? e.currentTarget.value : e.target.value;
     setOutput(output, (output[step].output = val));
-    console.log(output);
   };
 
   const [answer, setAnswer] = useState();
   function generateAnswer() {
     let answer = [];
-    output.forEach(o => o.output.length && answer.push(o.output));
+    output.forEach((e) => e.output.length && answer.push(e.output));
     setAnswer(answer.join(", "));
   }
 
-  //renders the active step, gives components access to update output state
+  //dynamically renders the current question component
   const currentQuestion = React.createElement(
     questionList[step].component,
     {
@@ -120,13 +116,13 @@ const FormCompiler = () => {
       handleChange: handleChange,
       answer: answer,
       generateAnswer: generateAnswer,
-      moveForward: moveForward
+      moveForward: moveForward,
     },
     null
   );
 
   return (
-    <Container disableGutters maxWidth={false}>
+    <Container maxWidth={false}>
       <Header
         title={output[step].title}
         handleReset={handleReset}

@@ -6,11 +6,11 @@ import {
   Button,
   Tabs,
   Tab,
-  Slide
+  Slide,
 } from "../../utility/themeIndex";
 
-const StratContact = props => {
-  const { step, outputStep, handleChange } = props;
+const StratContact = (props) => {
+  const { step, handleChange } = props;
   const [tabs, setTabs] = useState();
   const handleTabs = (e, newtab) => {
     setTabs(newtab);

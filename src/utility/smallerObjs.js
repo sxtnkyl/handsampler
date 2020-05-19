@@ -35,20 +35,20 @@
 const moistureObj = {
   descrip: "Moisture is a measure of liquid in a sample.",
   question: "How much moisture is in the sample?",
-  options: {
-    dry: {
+  options: [
+    {
       descrip: "There is no water. Sample is dry.",
-      answer: "Dry"
+      id: "Dry",
     },
-    moist: {
+    {
       descrip: "The sample is slightly wet.",
-      answer: "Moist"
+      id: "Moist",
     },
-    wet: {
+    {
       descrip: "Water is visible and saturates the sample.",
-      answer: "Wet"
-    }
-  }
+      id: "Wet",
+    },
+  ],
 };
 
 //https://stackoverflow.com/questions/2242086/how-to-detect-the-screen-resolution-with-javascript
@@ -60,21 +60,21 @@ const plasticityObj = {
   options: {
     non: {
       descrip: "Will NOT support a 6mm roll",
-      answer: "Non-plastic"
+      answer: "Non-plastic",
     },
     low: {
       descrip: "Can support a 6mm roll, but not 4mm",
-      answer: "Low Plasticity"
+      answer: "Low Plasticity",
     },
     medium: {
       descrip: "Can support a 4mm roll, but not 2mm",
-      answer: "Medium Plasticity"
+      answer: "Medium Plasticity",
     },
     high: {
       descrip: "Can support a 2mm roll",
-      answer: "High Plasticity"
-    }
-  }
+      answer: "High Plasticity",
+    },
+  },
 };
 
 //tabs
@@ -85,13 +85,13 @@ const cohesivenessObj = {
   options: {
     yes: {
       descrip: "The sample can form a 6mm diamter with the roll test",
-      answer: "Cohesive"
+      answer: "Cohesive",
     },
     no: {
       descrip: "The sample can NOT form a 6mm diamter with the roll test",
-      answer: "Noncohesive"
-    }
-  }
+      answer: "Noncohesive",
+    },
+  },
 };
 
 //https://en.wikipedia.org/wiki/Sedimentary_structures
@@ -104,25 +104,25 @@ const sedimentaryStructureObj = {
   options: {
     massive: {
       descrip: "The stratification is thick and homogeneous.",
-      answer: "Massive"
+      answer: "Massive",
     },
     thick: {
       descrip: "Beds are >30cm",
-      answer: "Thickly Bedded"
+      answer: "Thickly Bedded",
     },
     bedded: {
       descrip: "Beds are 3-30cm",
-      answer: "Bedded"
+      answer: "Bedded",
     },
     thin: {
       descrip: "Beds are 0.5-30cm",
-      answer: "Thinly Bedded"
+      answer: "Thinly Bedded",
     },
     laminated: {
       descrip: "Beds are <0.5cm",
-      answer: "Laminated"
-    }
-  }
+      answer: "Laminated",
+    },
+  },
 };
 
 const weatheringObj = {
@@ -131,7 +131,6 @@ const weatheringObj = {
   question: "Check and submit all that apply for each question",
   questions: [
     {
-      index: 0,
       descrip: "These are extra properties that may or may not be present",
       question: "Enter the modifier symbol, if present.",
       options: [
@@ -139,37 +138,36 @@ const weatheringObj = {
           name: "mottled",
           descrip:
             "The soil contains colors not associated with the compositional properties",
-          answer: "M"
+          answer: "M",
         },
         {
           name: "jointed",
           descrip:
             "Has fractures, spaces, or cracks that show no offset across the fracture",
-          answer: "J"
-        }
-      ]
+          answer: "J",
+        },
+      ],
     },
     {
-      index: 1,
       descrip: "Is there any signs of oxidation present?",
       question: "Enter the 1st symbol",
       options: [
         {
           name: "oxidized",
           descrip: "Signs of oxidation are present in the sample.",
-          answer: "O"
+          answer: "O",
         },
         {
           name: "reduced",
           descrip: "Signs of Redux reactions are persent.",
-          answer: "R"
+          answer: "R",
         },
         {
           name: "unoxidized",
           descrip: "No sign of oxidation or reduction.",
-          answer: "U"
-        }
-      ]
+          answer: "U",
+        },
+      ],
     },
     {
       descrip:
@@ -179,14 +177,14 @@ const weatheringObj = {
         {
           name: "leaching",
           descrip: "Has evidence of leaching",
-          answer: "L"
+          answer: "L",
         },
         {
           name: "unleached",
           descrip: "No evidence of leaching",
-          answer: "U"
-        }
-      ]
+          answer: "U",
+        },
+      ],
     },
     {
       descrip:
@@ -197,11 +195,11 @@ const weatheringObj = {
           name: "carbonates",
           descrip:
             "The sample contains trace carbonate from secondary precipitation.",
-          answer: "2"
-        }
-      ]
-    }
-  ]
+          answer: "2",
+        },
+      ],
+    },
+  ],
 };
 
 //https://munsell.com/color-products/color-communications-products/environmental-color-communication/munsell-soil-color-charts/
@@ -212,32 +210,40 @@ const colorObj = {
   options: {
     "5Y": {
       descrip: "some yellow color",
-      answer: "5/2 5Y"
-    }
-  }
+      answer: "5/2 5Y",
+    },
+  },
 };
 
 const densityObj = {
-  coarse: {
-    "0-4": "very loose",
-    "5-10": "loose",
-    "11-29": "medium dense",
-    "30-49": "dense",
-    ">50": "very dense"
-  },
-  fine: {
-    "0-2": "very soft",
-    "3-4": "soft",
-    "5-8": "medium",
-    "9-15": "stiff",
-    "16-29": "very stiff",
-    ">30": "hard"
-  },
   question: "Is the sample coarse or fine grained?",
   descrip: "A sample's density can be described based on the deposit grains.",
   step2: "The correct description is the based on the N-Value.",
   nValue:
-    "The N value represents a standard value of energy required to penetrate 30 cm into soil by percussion drilling. It is standardized as the energy of a falling hammer from a height of 0,76 m or about 472,95 J. In North America it is considered that the percussion has a 60% energy efficiency, or 283.8J.  As SPT is the most most popular field test, the N value is widely used. Engineers correlate it to granular soils density and clays consistency. The N value is implemented on design using empirical correlations, specially in foundations design. Friction angle, cohesion, stiffness and even the risk of liquefaction can be estimated by the N value correlations."
+    "The N value represents a standard value of energy required to penetrate 30 cm into soil by percussion drilling. It is standardized as the energy of a falling hammer from a height of 0,76 m or about 472,95 J. In North America it is considered that the percussion has a 60% energy efficiency, or 283.8J.  As SPT is the most most popular field test, the N value is widely used. Engineers correlate it to granular soils density and clays consistency. The N value is implemented on design using empirical correlations, specially in foundations design. Friction angle, cohesion, stiffness and even the risk of liquefaction can be estimated by the N value correlations.",
+  options: [
+    {
+      id: "coarse",
+      values: [
+        { n: "0-4", descrip: "very loose" },
+        { n: "5-10", descrip: "loose" },
+        { n: "11-29", descrip: "medium dense" },
+        { n: "30-49", descrip: "dense" },
+        { n: ">50", descrip: "very dense" },
+      ],
+    },
+    {
+      id: "fine",
+      values: [
+        { n: "0-2", descrip: "very soft" },
+        { n: "3-4", descrip: "soft" },
+        { n: "5-8", descrip: "medium" },
+        { n: "9-15", descrip: "stiff" },
+        { n: "16-29", descrip: "very stiff" },
+        { n: ">30", descrip: "hard" },
+      ],
+    },
+  ],
 };
 
 const stratContactObj = {
@@ -248,14 +254,14 @@ const stratContactObj = {
     {
       name: "Sharp",
       descrip: "The contact is over a distance of < 10cm",
-      answer: "Sharp Contact"
+      answer: "Sharp Contact",
     },
     {
       name: "Gradational",
       descrip: "The contact is over a distance of > 10cm",
-      answer: "Gradational Contact"
-    }
-  ]
+      answer: "Gradational Contact",
+    },
+  ],
 };
 
 export {
@@ -266,5 +272,5 @@ export {
   weatheringObj,
   colorObj,
   densityObj,
-  stratContactObj
+  stratContactObj,
 };

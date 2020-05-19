@@ -8,27 +8,27 @@ import {
   MenuIcon,
   Button,
   RotateLeftRounded,
-  DoneRounded
+  DoneRounded,
 } from "../../utility/themeIndex";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   fillType: {
     flex: 1,
-    color: theme.palette.secondary.contrastText
+    color: theme.palette.secondary.contrastText,
   },
   menu: {
     color: theme.palette.secondary.contrastText,
     "&:hover": {
-      backgroundColor: theme.palette.primary.light
-    }
+      backgroundColor: theme.palette.primary.light,
+    },
   },
   icons: {
     color: theme.palette.secondary.contrastText,
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));
 
-export default function Header(props) {
+const Header = (props) => {
   const classes = useStyles();
   const { title, handleReset, disableButton, toFinish } = props;
 
@@ -64,4 +64,6 @@ export default function Header(props) {
       </Toolbar>
     </AppBar>
   );
-}
+};
+
+export default Header;

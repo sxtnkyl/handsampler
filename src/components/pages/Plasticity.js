@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { plasticityObj } from "../../utility/smallerObjs";
 import {
   Paper,
@@ -7,11 +7,11 @@ import {
   Tabs,
   Typography,
   Slide,
-  Divider
+  Divider,
 } from "../../utility/themeIndex";
 
-const Plasticity = props => {
-  const { step, outputStep, handleChange } = props;
+const Plasticity = (props) => {
+  const { step, handleChange } = props;
   const [tabs, setTabs] = useState();
   const handleTabs = (e, newtab) => {
     setTabs(newtab);

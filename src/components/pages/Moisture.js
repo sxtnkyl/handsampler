@@ -1,46 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { moistureObj } from "../../utility/smallerObjs";
 import {
   Paper,
   Button,
   Slide,
   Typography,
-  ButtonGroup,
-  makeStyles,
-  Divider
+  Divider,
+  Tab,
+  Tabs,
 } from "../../utility/themeIndex";
 
-const useStyles = makeStyles(theme => ({
-  groupButtons: {
-    margin: theme.spacing(0)
-  }
-}));
+const Moisture = (props) => {
+  const { step, handleChange } = props;
 
-const Moisture = props => {
-  const classes = useStyles();
-  const { step, outputStep, handleChange } = props;
-
-  //obj: {descrip: "", answer: ""}
+  const [tabs, setTabs] = useState();
+  const handleTabs = (e, newtab) => {
+    setTabs(newtab);
+  };
+  //obj: {descrip, id}
   const [value, setValue] = useState();
-  useEffect(() => {}, [value]);
 
-  const options = Object.entries(moistureObj.options).map((o, index) => (
-    <Button
-      className={classes.groupButtons}
-      onClick={() => setValue(o[1])}
-      size="small"
-      key={index}
-    >
-      {o[0]}
-    </Button>
-  ));
-  const displayDescrip = value && (
-    <Typography variant="body1">{value.descrip}</Typography>
+  const optionsTabs = (
+    <Tabs value={tabs} onChange={handleTabs} centered>
+      {moistureObj.options.map((k, index) => (
+        <Tab key={index} label={`${k.id}`} onClick={() => setValue(index)} />
+      ))}
+    </Tabs>
   );
 
-  const setButton = value && (
+  const displayDescrip = tabs >= 0 && (
+    <Typography variant="body1">{moistureObj.options[tabs].descrip}</Typography>
+  );
+
+  const setButton = tabs >= 0 && (
     <Button
-      value={value.answer}
+      value={value.id}
       variant="outlined"
       size="large"
       onClick={handleChange(value)}
@@ -55,9 +49,7 @@ const Moisture = props => {
         <Typography variant="h3">{moistureObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="h6">{moistureObj.descrip}</Typography>
-        <ButtonGroup variant="text" orientation="horizontal">
-          {options}
-        </ButtonGroup>
+        {optionsTabs}
         {displayDescrip}
         {setButton}
       </Paper>

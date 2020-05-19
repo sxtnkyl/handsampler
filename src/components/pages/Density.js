@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { densityObj } from "../../utility/smallerObjs";
 import {
-  makeStyles,
   Paper,
-  Button,
   Typography,
   Slide,
   FormControl,
@@ -11,46 +9,44 @@ import {
   RadioGroup,
   Divider,
   Radio,
-  ButtonGroup
+  Tabs,
+  Tab,
 } from "../../utility/themeIndex";
 
-const useStyles = makeStyles(theme => ({
-  groupButtons: {
-    margin: "0px 0px"
-  },
-  centerRadios: {
-    marginTop: theme.spacing(3),
-    justifyContent: "center"
-  }
-}));
-
-const Density = props => {
-  const classes = useStyles();
-  const { step, outputStep, handleChange } = props;
-
-  //null/dont render radios, true/render coarse, false/render fine
-  const [size, setSize] = useState(null);
+const Density = (props) => {
+  const { step, handleChange } = props;
 
   const [value, setValue] = useState("");
 
-  //https://stackoverflow.com/questions/33680157/how-can-i-get-input-radio-elements-to-horizontally-align-in-react-material-ui
-  //components can inherit properties of parent components
-  const nRadios = (
+  const [tabs, setTabs] = useState();
+  const handleTabs = (e, newtab) => {
+    console.log(newtab, densityObj.options[newtab].values);
+    setTabs(newtab);
+  };
+  const optionsTabs = (
+    <Tabs value={tabs} onChange={handleTabs} centered>
+      {densityObj.options.map((k, index) => (
+        <Tab key={index} label={`${k.id}`} onClick={() => setTabs(index)} />
+      ))}
+    </Tabs>
+  );
+
+  const nRadios = tabs >= 0 && (
     <FormControl component="fieldset">
       <RadioGroup
-        className={classes.centerRadios}
+        style={{ justifyContent: "center" }}
         row
         aria-label="n-value"
         name="density"
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
       >
-        {Object.entries(size ? densityObj.coarse : densityObj.fine).map(e => (
+        {densityObj.options[tabs].values.map((e) => (
           <FormControlLabel
-            key={e[1]}
-            value={e[1]}
+            key={e.descrip}
+            value={e.descrip}
             control={<Radio />}
-            label={`${e[0]}: ${e[1]}`}
+            label={`${e.n}: ${e.descrip}`}
             onClick={handleChange(value)}
           />
         ))}
@@ -63,23 +59,8 @@ const Density = props => {
         <Typography variant="h3">{densityObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="h6">{densityObj.descrip}</Typography>
-        <ButtonGroup variant="text" orientation="horizontal">
-          <Button
-            className={classes.groupButtons}
-            onClick={() => setSize(true)}
-            size="small"
-          >
-            Coarse
-          </Button>
-          <Button
-            className={classes.groupButtons}
-            onClick={() => setSize(false)}
-            size="small"
-          >
-            Fine
-          </Button>
-        </ButtonGroup>
-        {size !== null && nRadios}
+        {optionsTabs}
+        {nRadios}
       </Paper>
     </Slide>
   );
