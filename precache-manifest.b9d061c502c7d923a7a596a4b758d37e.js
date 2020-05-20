@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cd0da3b3104087447b394f22766c1dc6",
+    "revision": "df3604f0846da5b31741874af0a7e4dd",
     "url": "/handsampler/index.html"
   },
   {
-    "revision": "bfa355329031fc285e65",
+    "revision": "3c96f0aa2a81f50c6c82",
     "url": "/handsampler/static/css/main.f56537d3.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/handsampler/static/js/2.459e0d9c.chunk.js"
   },
   {
-    "revision": "bfa355329031fc285e65",
-    "url": "/handsampler/static/js/main.9614761e.chunk.js"
+    "revision": "3c96f0aa2a81f50c6c82",
+    "url": "/handsampler/static/js/main.ddc5a04a.chunk.js"
   },
   {
     "revision": "b38fa27ed53e23fa6cec",
