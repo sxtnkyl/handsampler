@@ -8,7 +8,6 @@ import {
   Divider,
   Tab,
   Tabs,
-  Card,
 } from "../../utility/themeIndex";
 
 const Moisture = (props) => {

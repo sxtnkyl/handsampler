@@ -11,7 +11,7 @@ import {
 } from "../../utility/themeIndex";
 
 const Cohesiveness = (props) => {
-  const { step, handleChange, moveForward } = props;
+  const { step, handleChange } = props;
 
   const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {

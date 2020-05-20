@@ -85,13 +85,14 @@ const FormCompiler = () => {
   const handleChange = (input) => (e) => {
     //button vs text inputs
     const val = e.currentTarget.value ? e.currentTarget.value : e.target.value;
-    setOutput(output, (output[step].output = val));
+    val === undefined
+      ? setOutput(output, (output[step].output = ""))
+      : setOutput(output, (output[step].output = val));
     moveForward();
   };
 
   const [answer, setAnswer] = useState();
   function generateAnswer() {
-    console.log(output);
     let answer = [];
     output.forEach((e) => e.output.length && answer.push(e.output));
     setAnswer(answer.join(", ").toUpperCase());

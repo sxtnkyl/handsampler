@@ -32,7 +32,7 @@ const GrainSize = (props) => {
   let hasOptions = path.hasOwnProperty("options");
   let hasQuestion = path.hasOwnProperty("question");
   let tabHasSymbol = path.options[tabs].hasOwnProperty("symbol");
-  let value = tabHasSymbol && path.options[tabs].id;
+  // let value = tabHasSymbol && path.options[tabs].id;
   let answer =
     tabHasSymbol &&
     path.options[tabs].name

@@ -13,7 +13,6 @@ import {
   FormGroup,
   Checkbox,
   RotateLeftRounded,
-  DoneRounded,
 } from "../../utility/themeIndex";
 
 const Weathering = (props) => {

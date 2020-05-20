@@ -35,6 +35,7 @@ const Density = (props) => {
     setValue(e.target.value);
   };
 
+  //https://stackoverflow.com/questions/42522515/what-are-react-controlled-components-and-uncontrolled-components
   const nRadios = tabs !== false && (
     <FormControl component="fieldset">
       <RadioGroup
@@ -43,15 +44,14 @@ const Density = (props) => {
         aria-label="n-value"
         name="density"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleRadioSelect}
       >
         {densityObj.options[tabs].values.map((e) => (
           <FormControlLabel
             key={e.descrip}
-            value={e.descrip}
+            value={`${e.descrip}(${e.n}n)`}
             control={<Radio />}
             label={`${e.n}: ${e.descrip}`}
-            onClick={handleRadioSelect}
           />
         ))}
       </RadioGroup>
