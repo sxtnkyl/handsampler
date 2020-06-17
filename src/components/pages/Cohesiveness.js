@@ -8,6 +8,7 @@ import {
   Tab,
   Tabs,
   Slide,
+  Container,
 } from "../../utility/themeIndex";
 
 const Cohesiveness = (props) => {
@@ -29,19 +30,19 @@ const Cohesiveness = (props) => {
   );
 
   const currentDescrip = tabs !== false && (
-    <Typography variant="h6">
+    <Typography variant="h6" style={{ flex: 1 }}>
       {cohesivenessObj.options[tabs].descrip}
     </Typography>
   );
 
-  const submitCohesion = tabs !== false && (
+  const submitCohesion = value && (
     <Button
       variant="contained"
       size="small"
       value={value}
       onClick={handleChange(value)}
     >
-      Submit Cohesiveness
+      <Typography variant="button">Submit Cohesiveness</Typography>
     </Button>
   );
 
@@ -51,10 +52,11 @@ const Cohesiveness = (props) => {
         <Typography variant="h3">{cohesivenessObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="subtitle1">{cohesivenessObj.descrip}</Typography>
-        <Divider variant="middle" />
-        {optionsTabs}
-        {currentDescrip}
-        {submitCohesion}
+        <Container>
+          {optionsTabs}
+          {currentDescrip}
+          {submitCohesion}
+        </Container>
       </Paper>
     </Slide>
   );

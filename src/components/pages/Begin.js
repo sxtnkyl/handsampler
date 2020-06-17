@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Paper, Slide, Divider } from "../../utility/themeIndex";
+import { Typography, Paper, Slide } from "../../utility/themeIndex";
 
 const Begin = (props) => {
   const { step } = props;
@@ -10,8 +10,7 @@ const Begin = (props) => {
         <Typography variant="h3">
           Welcome to the Hand Sample Generator!
         </Typography>
-        <Divider variant="middle" />
-        <Typography variant="h6">
+        <Typography variant="h6" style={{ flex: "0" }}>
           Answer each question to produce a sample description at the end of the
           survey.
         </Typography>

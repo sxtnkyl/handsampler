@@ -8,6 +8,7 @@ import {
   Typography,
   Slide,
   Divider,
+  Container,
 } from "../../utility/themeIndex";
 
 const Plasticity = (props) => {
@@ -28,7 +29,9 @@ const Plasticity = (props) => {
   );
 
   const currentDescrip = tabs !== false && (
-    <Typography variant="h6">{plasticityObj.options[tabs].descrip}</Typography>
+    <Typography variant="h6" style={{ flex: 1 }}>
+      {plasticityObj.options[tabs].descrip}
+    </Typography>
   );
 
   const submitPlasticity = value && (
@@ -38,7 +41,7 @@ const Plasticity = (props) => {
       value={value}
       onClick={handleChange(value)}
     >
-      Submit Plasticity
+      <Typography variant="button">Submit Plasticity</Typography>
     </Button>
   );
 
@@ -48,10 +51,11 @@ const Plasticity = (props) => {
         <Typography variant="h3">{plasticityObj.question}</Typography>
         <Divider variant="middle" />
         <Typography variant="subtitle1">{plasticityObj.descrip}</Typography>
-        <Divider variant="middle" />
-        {optionsTabs}
-        {currentDescrip}
-        {submitPlasticity}
+        <Container>
+          {optionsTabs}
+          {currentDescrip}
+          {submitPlasticity}
+        </Container>
       </Paper>
     </Slide>
   );

@@ -1,17 +1,29 @@
 import React from "react";
-import { Paper, makeStyles, Slide, Typography } from "../../utility/themeIndex";
+import {
+  Paper,
+  makeStyles,
+  Slide,
+  Typography,
+  Divider,
+} from "../../utility/themeIndex";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   expand: {
     flex: 1,
-    textAlign: "center"
+    textAlign: "center",
+    background: theme.palette.primary.main,
+    paddingLeft: theme.spacing(6),
+    paddingRight: theme.spacing(6),
+    paddingTop: theme.spacing(6),
   },
-  contrast: {
-    color: theme.palette.secondary.contrastText
-  }
+  header: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
 
-const End = props => {
+const End = (props) => {
   const classes = useStyles();
   const { step, generateAnswer, answer } = props;
 
@@ -25,8 +37,11 @@ const End = props => {
   return (
     <Slide direction="right" in={step === 12}>
       <Paper className={classes.expand}>
-        <Typography variant="h3">Your sample description is:</Typography>
-        <Typography className={classes.contrast} variant="h3">
+        <Typography variant="h4" className={classes.header}>
+          Your sample description is:
+        </Typography>
+        <Divider variant="middle" />
+        <Typography variant="h3" style={{ alignSelf: "center" }}>
           {answer}
         </Typography>
       </Paper>

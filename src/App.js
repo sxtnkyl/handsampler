@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import FormCompiler from "./components/parts/FormCompiler";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,12 +8,10 @@ import theme from "./utility/muiTheme";
 
 function App() {
   return (
-    <div className="App">
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <FormCompiler />
-      </MuiThemeProvider>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <FormCompiler />
+    </MuiThemeProvider>
   );
 }
 

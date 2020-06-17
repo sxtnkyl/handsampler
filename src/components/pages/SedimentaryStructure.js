@@ -8,6 +8,7 @@ import {
   Tab,
   Tabs,
   Slide,
+  Container,
 } from "../../utility/themeIndex";
 
 const SedimentaryStructure = (props) => {
@@ -29,19 +30,19 @@ const SedimentaryStructure = (props) => {
   );
 
   const currentDescrip = tabs !== false && (
-    <Typography variant="h6">
+    <Typography variant="h6" style={{ flex: 1 }}>
       {sedimentaryStructureObj.options[tabs].descrip}
     </Typography>
   );
 
-  const submitStructure = tabs !== false && (
+  const submitStructure = value && (
     <Button
       variant="contained"
       size="small"
       value={value}
       onClick={handleChange(value)}
     >
-      Submit structure
+      <Typography variant="button">Submit structure</Typography>
     </Button>
   );
 
@@ -53,10 +54,11 @@ const SedimentaryStructure = (props) => {
         <Typography variant="subtitle1">
           {sedimentaryStructureObj.descrip}
         </Typography>
-        <Divider variant="middle" />
-        {optionsTabs}
-        {currentDescrip}
-        {submitStructure}
+        <Container>
+          {optionsTabs}
+          {currentDescrip}
+          {submitStructure}
+        </Container>
       </Paper>
     </Slide>
   );

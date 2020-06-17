@@ -6,6 +6,7 @@ import {
   Typography,
   Divider,
   Button,
+  Container,
 } from "../../utility/themeIndex";
 
 const Color = (props) => {
@@ -16,6 +17,23 @@ const Color = (props) => {
   const handleTextFieldChange = (event) => {
     setValue(event.target.value);
   };
+
+  const pickColors = (
+    <Container>
+      <Typography variant="subtitle1">
+        *future version will have color selector
+      </Typography>
+      <TextField
+        variant="filled"
+        multiline={true}
+        rows="6"
+        placeholder="Type all present Munsell scale colors from most to least prevalent"
+        label={outputStep.output}
+        onChange={handleTextFieldChange}
+        defaultValue={outputStep.output}
+      />
+    </Container>
+  );
 
   const submitColors = (
     <Button
@@ -35,20 +53,10 @@ const Color = (props) => {
           Enter the colors that best represents the sample.
         </Typography>
         <Divider variant="middle" />
-        <Typography variant="subtitle1">
-          *future version will have color selector
-        </Typography>
-        <Divider variant="middle" />
-        <TextField
-          variant="filled"
-          multiline={true}
-          rows="6"
-          placeholder="Type all present Munsell scale colors from most to least prevalent"
-          label={outputStep.output}
-          onChange={handleTextFieldChange}
-          defaultValue={outputStep.output}
-        />
-        {submitColors}
+        <Container>
+          {pickColors}
+          {submitColors}
+        </Container>
       </Paper>
     </Slide>
   );

@@ -13,6 +13,7 @@ import {
   FormGroup,
   Checkbox,
   RotateLeftRounded,
+  Container,
 } from "../../utility/themeIndex";
 
 const Weathering = (props) => {
@@ -20,8 +21,7 @@ const Weathering = (props) => {
 
   //array of objects(an object for each question), with key(name) and value(arr["letter", checked(bool)])
   const [boxes, setBoxes] = useState();
-
-  function makeBoxes() {
+  const makeBoxes = () => {
     //on page load make an object for each question/options
     let start = 0;
     let num = weatheringObj.questions.length;
@@ -36,19 +36,18 @@ const Weathering = (props) => {
       opts.forEach((o) => (allQs[index][o.name] = [o.answer, false]));
     });
     setBoxes(allQs);
-  }
+  };
   //run once on load to make checkboxes values
   useEffect(() => {
     makeBoxes();
   }, []);
-
   const handleBoxes = (e) => {
-    //ie: target = "C"
+    //ie: target = "M"
     let target = e.target.value;
     let newBox = [...boxes];
     let newArrVal = [];
-    newArrVal.push(newBox[activeTab][target][0], !newBox[activeTab][target][1]);
-    newBox[activeTab][target] = newArrVal;
+    newArrVal.push(newBox[tabs][target][0], !newBox[tabs][target][1]);
+    newBox[tabs][target] = newArrVal;
     setBoxes(newBox);
   };
 
@@ -67,40 +66,56 @@ const Weathering = (props) => {
     setValue(pushString);
   }, [boxes]);
 
-  const [activeTab, setActiveTab] = useState(0);
-
+  const [tabs, setTabs] = useState(false);
   const handleActiveTab = (e, newtab) => {
-    setActiveTab(newtab);
+    setTabs(newtab);
   };
 
   const optionsTabs = (
-    <Tabs onChange={handleActiveTab} value={activeTab} variant="scrollable">
+    <Tabs onChange={handleActiveTab} value={tabs} centered>
       {weatheringObj.questions.map((k, index) => (
         <Tab key={index} value={index} label={k.question} />
       ))}
     </Tabs>
   );
 
-  const checkBoxes = boxes && (
+  const checkBoxes = tabs !== false && (
     <FormControl component="fieldset">
-      <FormGroup row style={{ justifyContent: "center" }}>
-        {weatheringObj.questions[activeTab].options.map((o) => (
-          <FormControlLabel
-            key={o.answer}
-            control={
-              <Checkbox
-                size="small"
-                key={o.name}
-                value={o.name}
-                checked={boxes[activeTab][o.name][1]}
-                onChange={(e) => handleBoxes(e)}
-              />
-            }
-            label={`${o.name.toUpperCase()}: ${o.descrip}`}
-          />
+      <FormGroup>
+        {weatheringObj.questions[tabs].options.map((o) => (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <FormControlLabel
+              key={o.answer}
+              control={
+                <Checkbox
+                  size="small"
+                  key={o.name}
+                  value={o.name}
+                  checked={boxes[tabs][o.name][1]}
+                  onChange={(e) => handleBoxes(e)}
+                />
+              }
+              label={
+                <Typography variant="button">{o.name.toUpperCase()}</Typography>
+              }
+            />
+            <Typography variant="subtitle1">{o.descrip}</Typography>
+          </div>
         ))}
       </FormGroup>
     </FormControl>
+  );
+
+  const currentDescrip = tabs !== false && (
+    <Typography variant="h6">
+      {weatheringObj.questions[tabs].descrip}
+    </Typography>
   );
 
   const resetBoxes = (
@@ -125,15 +140,15 @@ const Weathering = (props) => {
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{weatheringObj.question}</Typography>
         <Divider variant="middle" />
-        <Typography variant="subtitle1">{weatheringObj.descrip}</Typography>
-        <Divider variant="middle" />
-        {optionsTabs}
-        <Typography variant="h6">
-          {weatheringObj.questions[activeTab].descrip}
-        </Typography>
-        {checkBoxes}
-        {resetBoxes}
-        {submitBoxes}
+        <Container>
+          <Typography variant="subtitle1">{weatheringObj.descrip}</Typography>
+          {optionsTabs}
+          <Container>
+            {currentDescrip}
+            {checkBoxes}
+          </Container>
+          {submitBoxes}
+        </Container>
       </Paper>
     </Slide>
   );

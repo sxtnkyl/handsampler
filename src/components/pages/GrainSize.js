@@ -7,6 +7,7 @@ import {
   Tab,
   Typography,
   Button,
+  Container,
 } from "../../utility/themeIndex";
 import grainSizeObj from "../../utility/grainSizeObj";
 //import as JSON and parse for increase performance
@@ -17,7 +18,7 @@ const GrainSize = (props) => {
   const { step, handleChange } = props;
 
   //used for index matching
-  const [tabs, setTabs] = useState(0);
+  const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
     setTabs(newtab);
   };
@@ -26,25 +27,26 @@ const GrainSize = (props) => {
   function updatePath() {
     let newPath = path.options[tabs];
     setPath(newPath);
-    setTabs(0);
+    setTabs(false);
   }
 
+  let currentTab = tabs !== false && path.options[tabs];
   let hasOptions = path.hasOwnProperty("options");
   let hasQuestion = path.hasOwnProperty("question");
-  let tabHasSymbol = path.options[tabs].hasOwnProperty("symbol");
-  // let value = tabHasSymbol && path.options[tabs].id;
+  let tabHasSymbol = currentTab.hasOwnProperty("symbol");
+  // let value = tabHasSymbol && currentTab.id;
   let answer =
     tabHasSymbol &&
-    path.options[tabs].name
-      .concat(" (", path.options[tabs].symbol, ")")
-      .toUpperCase();
+    currentTab.name.concat(" (", currentTab.symbol, ")").toUpperCase();
 
   const currentQuestion = hasQuestion && (
     <Typography variant="h3">{path.question}</Typography>
   );
 
-  const currentDescription = path.options[tabs].hasOwnProperty("descrip") && (
-    <Typography variant="h6">{path.options[tabs].descrip}</Typography>
+  const currentDescription = currentTab.hasOwnProperty("descrip") && (
+    <Typography variant="h6" style={{ flex: 1 }}>
+      {currentTab.descrip}
+    </Typography>
   );
 
   const optionsTabs = hasOptions && (
@@ -63,17 +65,19 @@ const GrainSize = (props) => {
 
   const endOfLine = (
     <>
-      <Typography variant="subtitle1">
-        The sample group name and symbol is:
-      </Typography>
-      <Typography variant="h6">{answer}</Typography>
+      <Container>
+        <Typography variant="subtitle1">
+          The sample group name and symbol is:
+        </Typography>
+        <Typography variant="h4">{answer}</Typography>
+      </Container>
       <Button
         variant="contained"
         size="small"
         value={answer}
         onClick={handleChange(answer)}
       >
-        Submit Grain Size
+        <Typography variant="button">Submit Grain Size</Typography>
       </Button>
     </>
   );
@@ -83,9 +87,11 @@ const GrainSize = (props) => {
       <Paper variant="outlined" elevation={7}>
         {currentQuestion}
         <Divider variant="middle" />
-        {optionsTabs}
-        {currentDescription}
-        {tabHasSymbol ? endOfLine : selectButton}
+        <Container>
+          {optionsTabs}
+          {currentDescription}
+          {tabs === false ? null : tabHasSymbol ? endOfLine : selectButton}
+        </Container>
       </Paper>
     </Slide>
   );

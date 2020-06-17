@@ -5,14 +5,17 @@ const moistureObj = {
     {
       descrip: "There is no water. Sample is dry.",
       id: "Dry",
+      answer: "Dry",
     },
     {
       descrip: "The sample is slightly wet.",
       id: "Moist",
+      answer: "Moist",
     },
     {
       descrip: "Water is visible and saturates the sample.",
       id: "Wet",
+      answer: "Wet",
     },
   ],
 };
@@ -101,12 +104,12 @@ const sedimentaryStructureObj = {
 
 const weatheringObj = {
   descrip:
-    "Exposure to the water table or elements in the atmosphere can cause chemical alterations in a sample.",
-  question: "Check and submit all that apply for each question",
+    "Exposure to the water table or elements in the atmosphere can cause various kinds of chemical alterations in a sample. Check all that apply for each type of weathering.",
+  question: "Is there any evidence of chemical weathering?",
   questions: [
     {
       descrip: "These are extra properties that may or may not be present",
-      question: "Enter the modifier symbol, if present.",
+      question: "modifier symbol",
       options: [
         {
           name: "mottled",
@@ -124,7 +127,7 @@ const weatheringObj = {
     },
     {
       descrip: "Is there any signs of oxidation present?",
-      question: "Enter the 1st symbol",
+      question: "oxidation",
       options: [
         {
           name: "oxidized",
@@ -146,10 +149,10 @@ const weatheringObj = {
     {
       descrip:
         "An example could be discoloration from chemical reactions due to fluid movement within the sample.",
-      question: "Is there any evidence of leaching?",
+      question: "leaching",
       options: [
         {
-          name: "leaching",
+          name: "leached",
           descrip: "Has evidence of leaching",
           answer: "L",
         },
@@ -163,7 +166,7 @@ const weatheringObj = {
     {
       descrip:
         "Fluid movement in cracks and faults can lead to secondary mineral precipitation",
-      question: "Any secondary carbonates?",
+      question: "carbonates",
       options: [
         {
           name: "carbonates",

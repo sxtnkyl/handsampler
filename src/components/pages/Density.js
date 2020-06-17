@@ -13,6 +13,7 @@ import {
   Tab,
   Tooltip,
   Button,
+  Container,
 } from "../../utility/themeIndex";
 
 const Density = (props) => {
@@ -37,28 +38,34 @@ const Density = (props) => {
 
   //https://stackoverflow.com/questions/42522515/what-are-react-controlled-components-and-uncontrolled-components
   const nRadios = tabs !== false && (
-    <FormControl component="fieldset">
-      <RadioGroup
-        style={{ justifyContent: "center" }}
-        row
-        aria-label="n-value"
-        name="density"
-        value={value}
-        onChange={handleRadioSelect}
-      >
-        {densityObj.options[tabs].values.map((e) => (
-          <FormControlLabel
-            key={e.descrip}
-            value={`${e.descrip}(${e.n}n)`}
-            control={<Radio />}
-            label={`${e.n}: ${e.descrip}`}
-          />
-        ))}
-      </RadioGroup>
-    </FormControl>
+    <Container>
+      <FormControl component="fieldset">
+        <RadioGroup
+          style={{ justifyContent: "space-evenly" }}
+          row
+          aria-label="n-value"
+          name="density"
+          value={value}
+          onChange={handleRadioSelect}
+        >
+          {densityObj.options[tabs].values.map((e) => (
+            <FormControlLabel
+              key={e.descrip}
+              value={`${e.descrip}(${e.n}n)`}
+              control={<Radio />}
+              label={
+                <Typography variant="button">
+                  {e.n}: {e.descrip}
+                </Typography>
+              }
+            />
+          ))}
+        </RadioGroup>
+      </FormControl>
+    </Container>
   );
 
-  const submitDensity = (
+  const submitDensity = tabs !== false && (
     <Button
       variant="contained"
       size="small"
@@ -74,13 +81,14 @@ const Density = (props) => {
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">{densityObj.question}</Typography>
         <Divider variant="middle" />
-        <Tooltip title={densityObj.nValue} placement="bottom">
-          <Typography variant="subtitle1">{densityObj.descrip}</Typography>
-        </Tooltip>
-        <Divider variant="middle" />
-        {optionsTabs}
-        {nRadios}
-        {submitDensity}
+        <Container>
+          <Tooltip title={densityObj.nValue} placement="bottom">
+            <Typography variant="subtitle1">{densityObj.descrip}</Typography>
+          </Tooltip>
+          {optionsTabs}
+          {nRadios}
+          {submitDensity}
+        </Container>
       </Paper>
     </Slide>
   );

@@ -29,8 +29,18 @@ const theme = createMuiTheme({
   typography: {
     //h3: card titles
     h3: {
+      height: "20%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      lineHeight: "normal",
       fontWeight: "800",
-      margin: defaultTheme.spacing(3),
+      color: defaultTheme.palette.secondary.dark,
+    },
+    //grain size answer/end
+    h4: {
+      color: defaultTheme.palette.secondary.dark,
+      fontWeight: "600",
     },
     //h5: header/card tabs
     h5: {
@@ -40,6 +50,7 @@ const theme = createMuiTheme({
     h6: {
       marginTop: defaultTheme.spacing(3),
       marginBottom: defaultTheme.spacing(3),
+      fontWeight: 550,
     },
     button: {
       fontWeight: 550,
@@ -47,15 +58,16 @@ const theme = createMuiTheme({
       paddingLeft: defaultTheme.spacing(1),
       paddingRight: defaultTheme.spacing(1),
     },
-    //body1:
+    //weathering descrips
     body1: {
-      marginTop: defaultTheme.spacing(3),
-      marginBottom: defaultTheme.spacing(3),
+      display: "flex",
+      alignItems: "center",
     },
     //subt1: question descrip
     subtitle1: {
-      marginBottom: defaultTheme.spacing(0),
-      color: defaultTheme.palette.secondary.light,
+      marginTop: defaultTheme.spacing(3),
+      marginBottom: defaultTheme.spacing(3),
+      color: defaultTheme.palette.secondary.main,
       fontStyle: "italic",
     },
   },
@@ -80,7 +92,7 @@ const theme = createMuiTheme({
       },
       //contained: footer nav buttons
       contained: {
-        color: defaultTheme.palette.primary.main,
+        color: defaultTheme.palette.secondary.contrastText,
         backgroundColor: defaultTheme.palette.secondary.dark,
         "&:hover": {
           backgroundColor: defaultTheme.palette.secondary.light,
@@ -91,8 +103,6 @@ const theme = createMuiTheme({
       },
       //submit answer button
       containedSizeSmall: {
-        marginTop: "auto",
-        marginBottom: "auto",
         width: "30%",
         alignSelf: "center",
       },
@@ -106,11 +116,10 @@ const theme = createMuiTheme({
     },
     MuiContainer: {
       root: {
-        padding: "0px !important",
-        height: "100vh",
+        flex: "1",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        marginBottom: defaultTheme.spacing(3),
       },
     },
     MuiDrawer: {
@@ -158,8 +167,8 @@ const theme = createMuiTheme({
     },
     MuiDivider: {
       root: {
-        marginTop: defaultTheme.spacing(1),
-        marginBottom: defaultTheme.spacing(1),
+        marginTop: defaultTheme.spacing(3),
+        marginBottom: defaultTheme.spacing(3),
       },
     },
     MuiTabs: {
@@ -167,14 +176,18 @@ const theme = createMuiTheme({
         color: defaultTheme.palette.secondary.light,
         marginBottom: defaultTheme.spacing(3),
         "& .MuiTab-textColorInherit.Mui-selected": {
-          color: defaultTheme.palette.secondary.dark,
+          color: defaultTheme.palette.secondary.main,
         },
       },
       indicator: {
-        color: defaultTheme.palette.primary.dark,
+        color: defaultTheme.palette.secondary.dark,
       },
     },
     MuiTab: {
+      root: {
+        marginLeft: defaultTheme.spacing(1),
+        marginRight: defaultTheme.spacing(1),
+      },
       wrapper: {
         fontSize: defaultTheme.typography.h5.fontSize,
         fontWeight: "600",

@@ -8,6 +8,7 @@ import {
   Tab,
   Slide,
   Divider,
+  Container,
 } from "../../utility/themeIndex";
 
 const StratContact = (props) => {
@@ -28,19 +29,19 @@ const StratContact = (props) => {
   );
 
   const currentDescrip = tabs !== false && (
-    <Typography variant="h6">
+    <Typography variant="h6" style={{ flex: 1 }}>
       {stratContactObj.options[tabs].descrip}
     </Typography>
   );
 
-  const submitContact = tabs !== false && (
+  const submitContact = value && (
     <Button
       variant="contained"
       size="small"
       value={value}
       onClick={handleChange(value)}
     >
-      Submit Contact
+      <Typography variant="button">Submit Contact</Typography>
     </Button>
   );
 
@@ -50,10 +51,11 @@ const StratContact = (props) => {
         <Typography variant="h3">{stratContactObj.question}</Typography>
         <Divider />
         <Typography variant="subtitle1">{stratContactObj.descrip}</Typography>
-        <Divider />
-        {optionsTabs}
-        {currentDescrip}
-        {submitContact}
+        <Container>
+          {optionsTabs}
+          {currentDescrip}
+          {submitContact}
+        </Container>
       </Paper>
     </Slide>
   );

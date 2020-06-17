@@ -17,9 +17,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import NavDrawer from "./Drawer";
 
-import { Container } from "../../utility/themeIndex";
-
 const FormCompiler = () => {
+  const container = {
+    padding: "0px !important",
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  };
   //get component to render
   const questionList = [
     {
@@ -116,7 +121,7 @@ const FormCompiler = () => {
   questionList.forEach((item) => drawerList.push(item.title));
 
   return (
-    <Container maxWidth={false}>
+    <div style={container}>
       <Header
         toggleDrawer={toggleDrawer}
         title={output[step].title}
@@ -139,7 +144,7 @@ const FormCompiler = () => {
         moveForward={moveForward}
         moveBackward={moveBackward}
       />
-    </Container>
+    </div>
   );
 };
 
