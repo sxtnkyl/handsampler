@@ -10,8 +10,10 @@ import {
   Divider,
   Container,
 } from "../../utility/themeIndex";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Plasticity = (props) => {
+  const matches = useMediaQuery("(min-width:1500px)");
   const { step, handleChange } = props;
   const [tabs, setTabs] = useState(false);
   const handleTabs = (e, newtab) => {
@@ -24,8 +26,9 @@ const Plasticity = (props) => {
     <Tabs
       value={tabs}
       onChange={handleTabs}
-      variant="scrollable"
+      variant={matches ? "fullWidth" : "scrollable"}
       scrollButtons="on"
+      centered
     >
       {plasticityObj.options.map((k, index) => (
         <Tab key={index} label={`${k.id}`} />

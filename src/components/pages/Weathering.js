@@ -15,8 +15,10 @@ import {
   RotateLeftRounded,
   Container,
 } from "../../utility/themeIndex";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Weathering = (props) => {
+  const matches = useMediaQuery("(min-width:1500px)");
   const { step, handleChange } = props;
 
   //array of objects(an object for each question), with key(name) and value(arr["letter", checked(bool)])
@@ -75,7 +77,7 @@ const Weathering = (props) => {
     <Tabs
       onChange={handleActiveTab}
       value={tabs}
-      variant="scrollable"
+      variant={matches ? "fullWidth" : "scrollable"}
       scrollButtons="on"
     >
       {weatheringObj.questions.map((k, index) => (

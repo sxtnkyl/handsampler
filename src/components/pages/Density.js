@@ -34,14 +34,20 @@ const DensitySlider = withStyles((theme) => ({
     borderRadius: "4px",
   },
   valueLabel: {
+    left: "auto",
     //ATTRIBUTE SELECTOR
     //https://stackoverflow.com/questions/5110249/wildcard-in-css-for-classes
-    left: "auto",
-    "& span[class*='PrivateValueLabel-circle-']": {
+    // "& span[class*='PrivateValueLabel-circle-']": {
+    //   backgroundColor: theme.palette.secondary.main,
+    // },
+    // "& span[class*='PrivateValueLabel-label-']": {
+    //   color: theme.palette.secondary.contrastText,
+    // },
+    "& $span": {
       backgroundColor: theme.palette.secondary.main,
-    },
-    "& span[class*='PrivateValueLabel-label-']": {
-      color: theme.palette.secondary.contrastText,
+      "& $span": {
+        color: theme.palette.secondary.contrastText,
+      },
     },
   },
 }))(Slider);

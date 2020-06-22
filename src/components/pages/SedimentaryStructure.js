@@ -10,8 +10,10 @@ import {
   Slide,
   Container,
 } from "../../utility/themeIndex";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const SedimentaryStructure = (props) => {
+  const matches = useMediaQuery("(min-width:1500px)");
   const { step, handleChange } = props;
 
   const [tabs, setTabs] = useState(false);
@@ -25,7 +27,7 @@ const SedimentaryStructure = (props) => {
     <Tabs
       value={tabs}
       onChange={handleTabs}
-      variant="scrollable"
+      variant={matches ? "fullWidth" : "scrollable"}
       scrollButtons="on"
     >
       {sedimentaryStructureObj.options.map((k, index) => (
