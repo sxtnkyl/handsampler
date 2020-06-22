@@ -7,9 +7,10 @@ import {
   KeyboardArrowRight,
   Typography,
 } from "../../utility/themeIndex";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 export default function Header(props) {
-  // const classes = useStyles();
+  const matches = useMediaQuery("(min-width:920px)");
   const { steps, activeStep, moveForward, moveBackward } = props;
 
   const backButton = (
@@ -19,7 +20,7 @@ export default function Header(props) {
       disabled={activeStep === 0}
     >
       <KeyboardArrowLeft />
-      <Typography variant="button">backward</Typography>
+      {matches && <Typography variant="button">back</Typography>}
     </Button>
   );
 
@@ -29,7 +30,7 @@ export default function Header(props) {
       variant="contained"
       disabled={activeStep === steps - 1}
     >
-      <Typography variant="button">forward</Typography>
+      {matches && <Typography variant="button">next</Typography>}
       <KeyboardArrowRight />
     </Button>
   );

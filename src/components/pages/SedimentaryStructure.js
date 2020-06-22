@@ -22,7 +22,12 @@ const SedimentaryStructure = (props) => {
   let value = tabs !== false && sedimentaryStructureObj.options[tabs].answer;
 
   const optionsTabs = (
-    <Tabs value={tabs} onChange={handleTabs} centered>
+    <Tabs
+      value={tabs}
+      onChange={handleTabs}
+      variant="scrollable"
+      scrollButtons="on"
+    >
       {sedimentaryStructureObj.options.map((k, index) => (
         <Tab key={index} label={`${k.id}`} />
       ))}

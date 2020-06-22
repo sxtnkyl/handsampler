@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { green, blueGrey } from "@material-ui/core/colors";
 
 //https://github.com/mui-org/material-ui/issues/6939
@@ -16,7 +16,7 @@ const defaultTheme = createMuiTheme({
   },
 });
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: defaultTheme.palette.primary,
     secondary: defaultTheme.palette.secondary,
@@ -29,11 +29,14 @@ const theme = createMuiTheme({
   typography: {
     //h3: card titles
     h3: {
+      [defaultTheme.breakpoints.down("sm")]: {
+        fontSize: "1.75rem",
+        marginBottom: defaultTheme.spacing(1),
+      },
       height: "20%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      lineHeight: "normal",
       fontWeight: "800",
       color: defaultTheme.palette.secondary.dark,
     },
@@ -52,6 +55,7 @@ const theme = createMuiTheme({
       marginBottom: defaultTheme.spacing(3),
       fontWeight: 550,
     },
+    //typography within button
     button: {
       fontWeight: 550,
       color: "inherit",
@@ -65,6 +69,11 @@ const theme = createMuiTheme({
     },
     //subt1: question descrip
     subtitle1: {
+      [defaultTheme.breakpoints.down("sm")]: {
+        fontSize: "0.75rem",
+        marginTop: defaultTheme.spacing(1),
+        marginBottom: defaultTheme.spacing(1),
+      },
       marginTop: defaultTheme.spacing(3),
       marginBottom: defaultTheme.spacing(3),
       color: defaultTheme.palette.secondary.main,
@@ -74,15 +83,24 @@ const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
       root: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          paddingBottom: defaultTheme.spacing(0),
+        },
         paddingBottom: defaultTheme.spacing(1),
       },
     },
     MuiButton: {
       //header- oulined/medium
+      root: {
+        minWidth: "32px",
+      },
       outlined: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          padding: defaultTheme.spacing(0),
+        },
         color: defaultTheme.palette.secondary.contrastText,
         padding: defaultTheme.spacing(1),
-        margin: defaultTheme.spacing(1),
+        marginLeft: defaultTheme.spacing(1),
         borderColor: defaultTheme.palette.secondary.contrastText,
         "&:hover": {
           borderWidth: "3px",
@@ -92,6 +110,9 @@ const theme = createMuiTheme({
       },
       //contained: footer nav buttons
       contained: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          padding: "0px",
+        },
         color: defaultTheme.palette.secondary.contrastText,
         backgroundColor: defaultTheme.palette.secondary.dark,
         "&:hover": {
@@ -103,6 +124,9 @@ const theme = createMuiTheme({
       },
       //submit answer button
       containedSizeSmall: {
+        [defaultTheme.breakpoints.down("xs")]: {
+          width: "70%",
+        },
         width: "30%",
         alignSelf: "center",
       },
@@ -116,6 +140,9 @@ const theme = createMuiTheme({
     },
     MuiContainer: {
       root: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          padding: "0px",
+        },
         flex: "1",
         display: "flex",
         flexDirection: "column",
@@ -124,6 +151,9 @@ const theme = createMuiTheme({
     },
     MuiDrawer: {
       paperAnchorDockedLeft: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          width: "75vw",
+        },
         width: "25vw",
         background: defaultTheme.palette.secondary.dark,
         color: defaultTheme.palette.secondary.contrastText,
@@ -151,9 +181,23 @@ const theme = createMuiTheme({
       //top appbar paper at elevation 9
       //target questions at 7
       elevation7: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          width: "100%",
+          padding: `${defaultTheme.spacing(0)}px ${defaultTheme.spacing(1)}px`,
+          borderRadius: "0px",
+          marginBottom: defaultTheme.spacing(0),
+          marginTop: defaultTheme.spacing(0),
+        },
+        [defaultTheme.breakpoints.up("md")]: {
+          width: "80%",
+          padding: `${defaultTheme.spacing(3)}px ${defaultTheme.spacing(3)}px`,
+        },
+        [defaultTheme.breakpoints.up("lg")]: {
+          width: "70%",
+          padding: `${defaultTheme.spacing(3)}px ${defaultTheme.spacing(6)}px`,
+        },
         color: defaultTheme.palette.secondary.dark,
         background: defaultTheme.palette.primary.main,
-        width: "70%",
         alignSelf: "center",
         textAlign: "center",
         flex: 1,
@@ -161,12 +205,15 @@ const theme = createMuiTheme({
         flexDirection: "column",
         marginTop: defaultTheme.spacing(3),
         marginBottom: defaultTheme.spacing(3),
-        padding: `${defaultTheme.spacing(3)}px ${defaultTheme.spacing(6)}px`,
         boxShadow: `10px 10px 10px ${defaultTheme.palette.secondary.dark}, -10px -10px 10px ${defaultTheme.palette.secondary.dark}`,
       },
     },
     MuiDivider: {
       root: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          marginTop: defaultTheme.spacing(1),
+          marginBottom: defaultTheme.spacing(1),
+        },
         marginTop: defaultTheme.spacing(3),
         marginBottom: defaultTheme.spacing(3),
       },
@@ -189,12 +236,18 @@ const theme = createMuiTheme({
         marginRight: defaultTheme.spacing(1),
       },
       wrapper: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          fontSize: defaultTheme.typography.body1.fontSize,
+        },
         fontSize: defaultTheme.typography.h5.fontSize,
         fontWeight: "600",
       },
     },
     MuiTextField: {
       root: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          width: "90%",
+        },
         marginTop: defaultTheme.spacing(3),
         width: "70%",
         alignSelf: "center",
@@ -223,10 +276,14 @@ const theme = createMuiTheme({
       root: {
         width: "100%",
         height: "100%",
-        paddingLeft: defaultTheme.spacing(3),
-        paddingRight: defaultTheme.spacing(3),
+        paddingLeft: defaultTheme.spacing(2),
+        paddingRight: defaultTheme.spacing(2),
       },
       dot: {
+        [defaultTheme.breakpoints.down("sm")]: {
+          transform: "scale(0)",
+          margin: "0px 0px",
+        },
         transform: "scale(1.5)",
         margin: "0px 8px",
       },
@@ -239,4 +296,5 @@ const theme = createMuiTheme({
   },
 });
 
+theme = responsiveFontSizes(theme);
 export default theme;

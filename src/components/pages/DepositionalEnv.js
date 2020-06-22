@@ -51,7 +51,7 @@ const DepositionalEnv = (props) => {
     <Slide direction="right" in={step === 9}>
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">
-          If you have deduced the depositional environment, enter in below.
+          Can the Depositional Environment be deduced?
         </Typography>
         <Divider variant="middle" />
         <Container>

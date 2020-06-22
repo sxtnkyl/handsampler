@@ -50,7 +50,7 @@ const StratName = (props) => {
     <Slide direction="right" in={step === 10}>
       <Paper variant="outlined" elevation={7}>
         <Typography variant="h3">
-          If you have deduced the depositional environment, enter in below.
+          Can the Stratigraphic Name be deduced?
         </Typography>
         <Divider variant="middle" />
         <Container>

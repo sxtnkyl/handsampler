@@ -5,7 +5,9 @@ import {
   Slide,
   Typography,
   Divider,
+  Container,
 } from "../../utility/themeIndex";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -25,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const End = (props) => {
   const classes = useStyles();
+  const matches = useMediaQuery("(min-width:920px)");
   const { step, generateAnswer, answer } = props;
 
   generateAnswer();
@@ -41,9 +44,9 @@ const End = (props) => {
           Your sample description is:
         </Typography>
         <Divider variant="middle" />
-        <Typography variant="h3" style={{ alignSelf: "center" }}>
-          {answer}
-        </Typography>
+        <Container>
+          <Typography variant={matches ? "h3" : "h6"}>{answer}</Typography>
+        </Container>
       </Paper>
     </Slide>
   );

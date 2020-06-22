@@ -10,9 +10,13 @@ import {
   RotateLeftRounded,
   DoneRounded,
 } from "../../utility/themeIndex";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   menu: {
+    [theme.breakpoints.down("sm")]: {
+      marginRight: theme.spacing(0),
+    },
     color: theme.palette.secondary.contrastText,
     marginRight: theme.spacing(2),
     "&:hover": {
@@ -22,13 +26,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = (props) => {
+  const matches = useMediaQuery("(min-width:920px)");
   const classes = useStyles();
   const { toggleDrawer, title, handleReset, disableButton, toFinish } = props;
 
   const resetButton = (
     <Button onClick={handleReset} variant="outlined" size="medium">
       <RotateLeftRounded />
-      <Typography variant="button">Restart</Typography>
+      {matches && (
+        <Typography variant="button" query="(max-device-width: 960px)">
+          Restart
+        </Typography>
+      )}
     </Button>
   );
   const finishButton = (
@@ -39,7 +48,7 @@ const Header = (props) => {
       disabled={disableButton}
     >
       <DoneRounded />
-      <Typography variant="button">Finish</Typography>
+      {matches && <Typography variant="button">Finish</Typography>}
     </Button>
   );
 

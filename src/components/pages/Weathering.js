@@ -72,7 +72,12 @@ const Weathering = (props) => {
   };
 
   const optionsTabs = (
-    <Tabs onChange={handleActiveTab} value={tabs} centered>
+    <Tabs
+      onChange={handleActiveTab}
+      value={tabs}
+      variant="scrollable"
+      scrollButtons="on"
+    >
       {weatheringObj.questions.map((k, index) => (
         <Tab key={index} value={index} label={k.question} />
       ))}
@@ -84,6 +89,7 @@ const Weathering = (props) => {
       <FormGroup>
         {weatheringObj.questions[tabs].options.map((o) => (
           <div
+            key={o.name}
             style={{
               display: "flex",
               flexDirection: "row",

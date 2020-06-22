@@ -21,7 +21,12 @@ const Plasticity = (props) => {
   let value = tabs !== false && plasticityObj.options[tabs].answer;
 
   const optionsTabs = (
-    <Tabs value={tabs} onChange={handleTabs} centered>
+    <Tabs
+      value={tabs}
+      onChange={handleTabs}
+      variant="scrollable"
+      scrollButtons="on"
+    >
       {plasticityObj.options.map((k, index) => (
         <Tab key={index} label={`${k.id}`} />
       ))}

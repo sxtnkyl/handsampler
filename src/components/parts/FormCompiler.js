@@ -88,6 +88,7 @@ const FormCompiler = () => {
   const disableButton = step === output.length - 1;
 
   const handleChange = (input) => (e) => {
+    console.log(e, input);
     //button vs text inputs
     const val = e.currentTarget.value ? e.currentTarget.value : e.target.value;
     val === undefined
