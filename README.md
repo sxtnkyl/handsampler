@@ -14,4 +14,4 @@ Built with:
 
 Applied Concepts:
 
-###### `Reactjs` `useContext` `Form Submission` `Controlled Components` `Theme Providers`
+###### `Project Structure` `React Global Context` `Form Submission` `Controlled Components` `Theme Providers`
